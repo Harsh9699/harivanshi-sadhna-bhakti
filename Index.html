@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🕉️ Harivanshi Sadhna Bhakti</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Tiro+Devanagari+Sanskrit&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #FF6B00;
+    --deep-saffron: #E85D00;
+    --gold: #FFB300;
+    --gold-light: #FFD54F;
+    --cream: #FFF8E7;
+    --deep-maroon: #3E0000;
+    --maroon: #6B1A1A;
+    --dark-bg: #1A0A00;
+    --card-bg: rgba(255,248,231,0.06);
+    --border: rgba(255,179,0,0.25);
+    --text-light: #FFF3D0;
+    --text-muted: rgba(255,243,208,0.6);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Crimson Pro', serif;
+    background: var(--dark-bg);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(255,107,0,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(255,179,0,0.06) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(107,26,26,0.3) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .page { display: none; min-height: 100vh; position: relative; z-index: 1; }
+  .page.active { display: block; }
+  nav {
+    background: rgba(26,10,0,0.95);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+  }
+  .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+  .nav-brand {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    line-height: 1.3;
+  }
+  .nav-brand span { display: block; font-size: 9px; color: var(--saffron); letter-spacing: 3px; }
+  .nav-links { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .nav-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-light);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-family: 'Crimson Pro', serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .nav-btn:hover, .nav-btn.active-link { background: var(--saffron); border-color: var(--saffron); color: white; }
+  .nav-btn.gold {
+    background: linear-gradient(135deg, var(--gold), var(--saffron));
+    border: none;
+    color: var(--dark-bg);
+    font-weight: 600;
+  }
+  .hero { text-align: center; padding: 80px 20px 60px; position: relative; }
+  .om-symbol {
+    font-size: 80px;
+    line-height: 1;
+    margin-bottom: 20px;
+    animation: float 4s ease-in-out infinite;
+    display: block;
+    filter: drop-shadow(0 0 30px rgba(255,179,0,0.5));
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero h1 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: clamp(20px, 5vw, 38px);
+    color: var(--gold);
+    text-shadow: 0 0 40px rgba(255,179,0,0.4);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .hero p { color: var(--text-muted); font-size: 17px; font-style: italic; margin-bottom: 40px; }
+  .hero-btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--saffron), var(--deep-saffron));
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255,107,0,0.4);
+    transition: all 0.3s;
+    letter-spacing: 1px;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,107,0,0.5); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+  }
+  .btn-secondary:hover { background: rgba(255,179,0,0.1); }
+  .features {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+  }
+  .feature-card:hover { transform: translateY(-4px); border-color: var(--gold); background: rgba(255,248,231,0.1); }
+  .feature-card .icon { font-size: 36px; margin-bottom: 12px; display: block; }
+  .feature-card h3 { font-family: 'Cinzel Decorative', cursive; font-size: 12px; color: var(--gold); margin-bottom: 8px; }
+  .feature-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+  .divider { text-align: center; padding: 20px; color: var(--saffron); font-size: 24px; letter-spacing: 15px; opacity: 0.4; }
+  .auth-container { max-width: 420px; margin: 60px auto; padding: 20px; }
+  .auth-card {
+    background: rgba(255,248,231,0.05);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px 32px;
+    backdrop-filter: blur(20px);
+  }
+  .auth-card h2 { font-family: 'Cinzel Decorative', cursive; font-size: 18px; color: var(--gold); text-align: center; margin-bottom: 6px; }
+  .auth-card .subtitle { text-align: center; color: var(--text-muted); font-style: italic; margin-bottom: 30px; font-size: 15px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 13px; color: var(--gold-light); margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text-light);
+    font-family: 'Crimson Pro', serif;
+    font-size: 15px;
+    transition: border-color 0.3s;
+    outline: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); background: rgba(255,179,0,0.05); }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-group select option { background: #2a1000; color: var(--text-light); }
+  .btn-full {
+    width: 100%;
+    background: linear-gradient(135deg, var(--saffron), var(--deep-saffron));
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 13px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    margin-top: 8px;
+  }
+  .btn-full:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,0,0.4); }
+  .btn-full:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .auth-switch { text-align: center; margin-top: 20px; font-size: 14px; color: var(--text-muted); }
+  .auth-switch a { color: var(--saffron); cursor: pointer; text-decoration: underline; }
+  .error-msg { background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.3); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #ff8a80; margin-bottom: 16px; display: none; }
+  .success-msg { background: rgba(0,200,83,0.1); border: 1px solid rgba(0,200,83,0.3); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: #69f0ae; margin-bottom: 16px; display: none; }
+  .dashboard-header { background: linear-gradient(135deg, rgba(255,107,0,0.15), rgba(255,179,0,0.1)); border-bottom: 1px solid var(--border); padding: 30px 20px; text-align: center; }
+  .dashboard-header h2 { font-family: 'Cinzel Decorative', cursive; font-size: 16px; color: var(--gold); margin-bottom: 4px; }
+  .dashboard-header p { color: var(--text-muted); font-size: 15px; font-style: italic; }
+  .streak-display { display: flex; justify-content: center; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
+  .streak-item { text-align: center; background: rgba(255,179,0,0.08); border: 1px solid var(--border); border-radius: 16px; padding: 16px 24px; }
+  .streak-item .number { font-family: 'Cinzel Decorative', cursive; font-size: 32px; color: var(--gold); display: block; }
+  .streak-item .label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+  .dashboard-content { max-width: 900px; margin: 0 auto; padding: 30px 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 600px) { .dashboard-content { grid-template-columns: 1fr; } }
+  .dash-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; backdrop-filter: blur(10px); }
+  .dash-card h3 { font-family: 'Cinzel Decorative', cursive; font-size: 12px; color: var(--gold); margin-bottom: 16px; letter-spacing: 1px; }
+  .sadhna-page { max-width: 600px; margin: 0 auto; padding: 30px 20px; }
+  .sadhna-page h2 { font-family: 'Cinzel Decorative', cursive; font-size: 18px; color: var(--gold); text-align: center; margin-bottom: 6px; }
+  .sadhna-page .subtitle { text-align: center; color: var(--text-muted); font-style: italic; margin-bottom: 30px; }
+  .challenge-checklist { background: rgba(255,107,0,0.08); border: 1px solid rgba(255,107,0,0.3); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+  .challenge-checklist h3 { font-family: 'Cinzel Decorative', cursive; font-size: 12px; color: var(--saffron); margin-bottom: 16px; letter-spacing: 1px; }
+  .check-item { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid rgba(255,107,0,0.15); cursor: pointer; }
+  .check-item:last-child { border-bottom: none; }
+  .check-item input[type="checkbox"] { width: 22px; height: 22px; accent-color: var(--saffron); cursor: pointer; flex-shrink: 0; }
+  .check-item label { font-size: 15px; color: var(--text-light); cursor: pointer; line-height: 1.4; }
+  .check-item label small { display: block; color: var(--text-muted); font-size: 13px; }
+  .mala-counter { display: flex; align-items: center; gap: 15px; justify-content: center; margin: 10px 0; }
+  .mala-btn { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--gold); background: transparent; color: var(--gold); font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .mala-btn:hover { background: var(--gold); color: var(--dark-bg); }
+  .mala-count { font-family: 'Cinzel Decorative', cursive; font-size: 28px; color: var(--gold); min-width: 40px; text-align: center; }
+  .mala-target { font-size: 13px; color: var(--text-muted); text-align: center; }
+  .community-page { max-width: 700px; margin: 0 auto; padding: 30px 20px; }
+  .community-page h2 { font-family: 'Cinzel Decorative', cursive; font-size: 18px; color: var(--gold); text-align: center; margin-bottom: 6px; }
+  .community-page .subtitle { text-align: center; color: var(--text-muted); font-style: italic; margin-bottom: 30px; }
+  .report-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 22px; margin-bottom: 16px; backdrop-filter: blur(10px); transition: all 0.3s; animation: fadeInUp 0.4s ease both; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .report-card:hover { border-color: var(--gold); }
+  .report-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--saffron), var(--maroon)); display: flex; align-items: center; justify-content: center; font-family: 'Cinzel Decorative', cursive; font-size: 16px; color: white; flex-shrink: 0; border: 2px solid var(--border); }
+  .report-meta { flex: 1; }
+  .report-meta .bhakt-name { font-family: 'Cinzel Decorative', cursive; font-size: 13px; color: var(--gold); }
+  .report-meta .report-date { font-size: 12px; color: var(--text-muted); }
+  .streak-badge { background: linear-gradient(135deg, var(--saffron), var(--gold)); color: var(--dark-bg); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; font-family: 'Cinzel Decorative', cursive; white-space: nowrap; }
+  .report-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .badge { display: flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .badge.completed { background: rgba(0,200,83,0.15); border: 1px solid rgba(0,200,83,0.4); color: #69f0ae; }
+  .badge.partial { background: rgba(255,179,0,0.1); border: 1px solid rgba(255,179,0,0.3); color: var(--gold); }
+  .badge.missed { background: rgba(255,0,0,0.1); border: 1px solid rgba(255,0,0,0.2); color: #ff8a80; }
+  .report-extra { background: rgba(255,179,0,0.05); border-left: 3px solid var(--saffron); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 14px; color: var(--text-muted); font-style: italic; line-height: 1.6; margin-top: 10px; }
+  .leaderboard-page { max-width: 700px; margin: 0 auto; padding: 30px 20px; }
+  .leaderboard-page h2 { font-family: 'Cinzel Decorative', cursive; font-size: 18px; color: var(--gold); text-align: center; margin-bottom: 6px; }
+  .leaderboard-page .subtitle { text-align: center; color: var(--text-muted); font-style: italic; margin-bottom: 30px; }
+  .leaderboard-item { display: flex; align-items: center; gap: 16px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 16px 20px; margin-bottom: 10px; transition: all 0.3s; animation: fadeInUp 0.4s ease both; }
+  .leaderboard-item:hover { border-color: var(--gold); transform: translateX(4px); }
+  .leaderboard-item.top-1 { border-color: #FFD700; background: rgba(255,215,0,0.08); }
+  .leaderboard-item.top-2 { border-color: #C0C0C0; background: rgba(192,192,192,0.06); }
+  .leaderboard-item.top-3 { border-color: #CD7F32; background: rgba(205,127,50,0.06); }
+  .rank { font-family: 'Cinzel Decorative', cursive; font-size: 20px; color: var(--text-muted); min-width: 30px; text-align: center; }
+  .rank.gold { color: #FFD700; }
+  .rank.silver { color: #C0C0C0; }
+  .rank.bronze { color: #CD7F32; }
+  .lb-info { flex: 1; }
+  .lb-name { font-family: 'Cinzel Decorative', cursive; font-size: 13px; color: var(--text-light); }
+  .lb-stats { font-size: 13px; color: var(--text-muted); }
+  .lb-streak { text-align: right; font-family: 'Cinzel Decorative', cursive; }
+  .lb-streak .days { font-size: 24px; color: var(--gold); display: block; }
+  .lb-streak .days-label { font-size: 10px; color: var(--text-muted); }
+  .admin-page { max-width: 900px; margin: 0 auto; padding: 30px 20px; }
+  .admin-page h2 { font-family: 'Cinzel Decorative', cursive; font-size: 18px; color: var(--saffron); margin-bottom: 24px; text-align: center; }
+  .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 30px; }
+  .stat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+  .stat-card .num { font-family: 'Cinzel Decorative', cursive; font-size: 36px; color: var(--gold); display: block; }
+  .stat-card .lbl { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+  .admin-table { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+  .admin-table h3 { font-family: 'Cinzel Decorative', cursive; font-size: 12px; color: var(--gold); padding: 16px 20px; border-bottom: 1px solid var(--border); letter-spacing: 1px; }
+  .table-row { display: flex; align-items: center; padding: 14px 20px; border-bottom: 1px solid rgba(255,179,0,0.08); gap: 14px; font-size: 14px; }
+  .table-row:last-child { border-bottom: none; }
+  .table-row .tr-name { flex: 1; color: var(--text-light); font-family: 'Cinzel Decorative', cursive; font-size: 12px; }
+  .table-row .tr-email { flex: 2; color: var(--text-muted); font-size: 13px; }
+  .table-row .tr-streak { color: var(--gold); font-family: 'Cinzel Decorative', cursive; font-size: 14px; }
+  .announcement-form { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .announcement-form h3 { font-family: 'Cinzel Decorative', cursive; font-size: 12px; color: var(--gold); margin-bottom: 16px; letter-spacing: 1px; }
+  .loading { display: flex; align-items: center; justify-content: center; padding: 40px; color: var(--text-muted); font-style: italic; gap: 12px; }
+  .spinner { width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--saffron); border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: linear-gradient(135deg, var(--saffron), var(--deep-saffron)); color: white; padding: 14px 28px; border-radius: 30px; font-family: 'Cinzel Decorative', cursive; font-size: 11px; letter-spacing: 1px; z-index: 9999; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); text-align: center; max-width: 300px; box-shadow: 0 8px 30px rgba(255,107,0,0.5); }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+  .tab { padding: 8px 20px; border-radius: 20px; border: 1px solid var(--border); background: none; color: var(--text-muted); font-family: 'Crimson Pro', serif; font-size: 14px; cursor: pointer; transition: all 0.3s; }
+  .tab.active { background: var(--saffron); border-color: var(--saffron); color: white; }
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+  .empty-state .icon { font-size: 48px; margin-bottom: 16px; opacity: 0.5; }
+  .empty-state p { font-style: italic; }
+  .milestones { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+  .milestone-badge { padding: 5px 14px; border-radius: 20px; font-size: 12px; border: 1px solid var(--border); color: var(--text-muted); }
+  .milestone-badge.earned { background: linear-gradient(135deg, var(--saffron), var(--gold)); border: none; color: var(--dark-bg); font-weight: bold; }
+  .today-status { background: rgba(255,107,0,0.08); border: 1px solid rgba(255,107,0,0.3); border-radius: 12px; padding: 14px 18px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; font-size: 14px; }
+  .status-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--saffron); flex-shrink: 0; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.3); } }
+  footer { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 13px; border-top: 1px solid var(--border); margin-top: 40px; }
+  footer .om { font-size: 24px; display: block; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<nav id="mainNav" style="display:none">
+  <div class="nav-inner">
+    <div class="nav-brand">🕉️ Harivanshi<span>SADHNA BHAKTI</span></div>
+    <div class="nav-links" id="navLinks">
+      <button class="nav-btn" onclick="showPage('community')">🙏 Sangha</button>
+      <button class="nav-btn" onclick="showPage('leaderboard')">🏆 Leaderboard</button>
+      <button class="nav-btn" id="dashNavBtn" onclick="showPage('dashboard')">My Sadhna</button>
+      <button class="nav-btn" id="adminNavBtn" onclick="showPage('admin')" style="display:none">⚙️ Admin</button>
+      <button class="nav-btn gold" onclick="logout()">🚪 Logout</button>
+    </div>
+  </div>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<div class="page active" id="page-home">
+  <div class="hero">
+    <span class="om-symbol">🕉️</span>
+    <h1>Harivanshi Sadhna Bhakti</h1>
+    <p>हरिवंशी साधना भक्ति — A Sacred Community of Devoted Bhakts</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="showPage('signup')">🙏 Join the Sangha</button>
+      <button class="btn-secondary" onclick="showPage('login')">🔑 Login</button>
+    </div>
+  </div>
+  <div class="divider">✦ ✦ ✦</div>
+  <div class="features">
+    <div class="feature-card"><span class="icon">📿</span><h3>11 Mala Naam Jap</h3><p>Track your daily 11 Mala of Naam Jap and build a powerful spiritual streak</p></div>
+    <div class="feature-card"><span class="icon">🎧</span><h3>30 Min Satsang</h3><p>Listen to spiritual discourses daily and deepen your connection with the Divine</p></div>
+    <div class="feature-card"><span class="icon">🌟</span><h3>Extra Sadhna</h3><p>Share additional spiritual practices you've done to inspire fellow bhakts</p></div>
+    <div class="feature-card"><span class="icon">🏆</span><h3>Community Leaderboard</h3><p>See streaks and progress of all bhakts — learn and grow together</p></div>
+    <div class="feature-card"><span class="icon">🔥</span><h3>Streak Tracking</h3><p>Build consistency with daily streak tracking and earn Bhakti badges</p></div>
+    <div class="feature-card"><span class="icon">🕊️</span><h3>Sacred Announcements</h3><p>Stay updated with satsang schedules and spiritual program announcements</p></div>
+  </div>
+  <div class="divider">🕉️</div>
+  <footer><span class="om">🕉️</span>हरे कृष्ण हरे कृष्ण कृष्ण कृष्ण हरे हरे<br>Harivanshi Sadhna Bhakti © 2025 — All Bhakts Welcome</footer>
+</div>
+
+<div class="page" id="page-login">
+  <div class="auth-container">
+    <div class="auth-card">
+      <div style="text-align:center;font-size:40px;margin-bottom:10px">🕉️</div>
+      <h2>Jai Harivansh</h2>
+      <p class="subtitle">Login to continue your sadhna</p>
+      <div class="error-msg" id="loginError"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••••"></div>
+      <button class="btn-full" id="loginBtn" onclick="loginUser()">🙏 Login</button>
+      <div class="auth-switch">New bhakt? <a onclick="showPage('signup')">Create account</a></div>
+      <div class="auth-switch" style="margin-top:8px"><a onclick="showPage('home')">← Back to Home</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-signup">
+  <div class="auth-container">
+    <div class="auth-card">
+      <div style="text-align:center;font-size:40px;margin-bottom:10px">🕉️</div>
+      <h2>Join the Sangha</h2>
+      <p class="subtitle">Begin your sadhna journey today</p>
+      <div class="error-msg" id="signupError"></div>
+      <div class="success-msg" id="signupSuccess"></div>
+      <div class="form-group"><label>Your Name (Bhakt Name)</label><input type="text" id="signupName" placeholder="e.g. Ram Das, Meera Devi"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="signupPassword" placeholder="Min 6 characters"></div>
+      <div class="form-group"><label>City / Location</label><input type="text" id="signupCity" placeholder="e.g. Mumbai, Delhi"></div>
+      <button class="btn-full" id="signupBtn" onclick="signupUser()">🙏 Join Sangha</button>
+      <div class="auth-switch">Already a bhakt? <a onclick="showPage('login')">Login here</a></div>
+      <div class="auth-switch" style="margin-top:8px"><a onclick="showPage('home')">← Back to Home</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-dashboard">
+  <div class="dashboard-header">
+    <h2 id="dashGreeting">🙏 Jai Harivansh</h2>
+    <p id="dashSubtitle">Your personal sadhna space</p>
+    <div class="streak-display">
+      <div class="streak-item"><span class="number" id="currentStreak">0</span><span class="label">🔥 Day Streak</span></div>
+      <div class="streak-item"><span class="number" id="totalReports">0</span><span class="label">📿 Total Reports</span></div>
+      <div class="streak-item"><span class="number" id="totalMalas">0</span><span class="label">🙏 Total Malas</span></div>
+    </div>
+    <div class="milestones" id="milestonesDisplay"></div>
+  </div>
+  <div class="dashboard-content">
+    <div class="dash-card" style="grid-column: 1/-1">
+      <h3>📋 TODAY'S SADHNA REPORT</h3>
+      <div class="today-status" id="todayStatusBar"><div class="status-dot"></div><span id="todayStatusText">Checking today's report...</span></div>
+      <div id="todayReportContent"><div class="loading"><div class="spinner"></div> Loading...</div></div>
+    </div>
+    <div class="dash-card">
+      <h3>📅 MY RECENT REPORTS</h3>
+      <div id="myRecentReports"><div class="loading"><div class="spinner"></div> Loading...</div></div>
+    </div>
+    <div class="dash-card">
+      <h3>🏅 MY BHAKTI BADGES</h3>
+      <div id="myBadgesDisplay" style="text-align:center;padding:10px"><div class="loading"><div class="spinner"></div> Loading...</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-sadhna">
+  <div class="sadhna-page">
+    <div style="text-align:center;font-size:40px;margin-bottom:10px">📿</div>
+    <h2>Daily Sadhna Report</h2>
+    <p class="subtitle">Record your sacred practice for today</p>
+    <div class="error-msg" id="sadhnaError"></div>
+    <div class="success-msg" id="sadhnaSuccess"></div>
+    <div class="challenge-checklist">
+      <h3>✨ DAILY CHALLENGE</h3>
+      <div class="check-item">
+        <input type="checkbox" id="check_mala" onchange="updateMalaSection()">
+        <label for="check_mala">📿 11 Mala Naam Jap Completed<small>Complete 11 rounds of Naam Jap on your mala</small></label>
+      </div>
+      <div id="malaSection" style="padding:10px 0 5px; display:none">
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px;text-align:center">How many malas did you complete?</div>
+        <div class="mala-counter">
+          <button class="mala-btn" onclick="changeMala(-1)">−</button>
+          <span class="mala-count" id="malaCount">11</span>
+          <button class="mala-btn" onclick="changeMala(1)">+</button>
+        </div>
+        <div class="mala-target" id="malaTarget">Target: 11 Mala ✅</div>
+      </div>
+      <div class="check-item">
+        <input type="checkbox" id="check_satsang">
+        <label for="check_satsang">🎧 30 Minutes Satsang Listened<small>Listen to spiritual discourse / pravachan</small></label>
+      </div>
+      <div class="form-group" style="margin-top:12px;margin-bottom:0">
+        <label>🎧 Which Satsang did you listen to?</label>
+        <input type="text" id="satsangName" placeholder="e.g. Bhagavat Katha, Ramayana Pravachan...">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>🌟 Extra Sadhna (Optional but Encouraged!)</label>
+      <textarea id="extraSadhna" placeholder="Share any additional spiritual practices you did today...&#10;e.g. Visited temple, read Gita, seva, bhajan, meditation, fasting..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>💭 Your Bhakti Reflection (Optional)</label>
+      <textarea id="reflection" placeholder="Share a thought, learning, or experience from today's sadhna that can inspire other bhakts..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>🌸 Your Mood / Bhav Today</label>
+      <select id="mood">
+        <option value="">Select your spiritual mood...</option>
+        <option value="🌟 Blissful">🌟 Blissful — Ananda</option>
+        <option value="🙏 Devoted">🙏 Devoted — Bhakti Bhav</option>
+        <option value="😌 Peaceful">😌 Peaceful — Shanti</option>
+        <option value="💪 Strong">💪 Strong — Shakti</option>
+        <option value="🤔 Struggling">🤔 Struggling — but trying</option>
+        <option value="🔥 Intense">🔥 Intense — Tapasya mood</option>
+      </select>
+    </div>
+    <button class="btn-full" id="submitReportBtn" onclick="submitReport()">🙏 Submit Today's Report</button>
+    <div style="text-align:center;margin-top:16px">
+      <button class="btn-secondary" style="padding:10px 24px;font-size:12px" onclick="showPage('dashboard')">← Back to Dashboard</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-community">
+  <div class="community-page">
+    <div style="text-align:center;font-size:40px;margin-bottom:10px">🕊️</div>
+    <h2>Bhakti Sangha</h2>
+    <p class="subtitle">Read and be inspired by fellow bhakts' daily sadhna</p>
+    <div class="tabs">
+      <button class="tab active" onclick="loadCommunity('all', this)">All Reports</button>
+      <button class="tab" onclick="loadCommunity('today', this)">Today</button>
+      <button class="tab" onclick="loadCommunity('week', this)">This Week</button>
+    </div>
+    <div id="communityFeed"><div class="loading"><div class="spinner"></div> Loading bhakts' reports...</div></div>
+  </div>
+</div>
+
+<div class="page" id="page-leaderboard">
+  <div class="leaderboard-page">
+    <div style="text-align:center;font-size:40px;margin-bottom:10px">🏆</div>
+    <h2>Sadhna Leaderboard</h2>
+    <p class="subtitle">Bhakts with the highest sadhna streaks</p>
+    <div id="leaderboardList"><div class="loading"><div class="spinner"></div> Loading leaderboard...</div></div>
+  </div>
+</div>
+
+<div class="page" id="page-admin">
+  <div class="admin-page">
+    <div style="text-align:center;font-size:40px;margin-bottom:10px">⚙️</div>
+    <h2>Admin Dashboard</h2>
+    <div class="admin-grid">
+      <div class="stat-card"><span class="num" id="adminTotalUsers">-</span><span class="lbl">Total Bhakts</span></div>
+      <div class="stat-card"><span class="num" id="adminTodayReports">-</span><span class="lbl">Reports Today</span></div>
+      <div class="stat-card"><span class="num" id="adminTotalReports">-</span><span class="lbl">Total Reports</span></div>
+      <div class="stat-card"><span class="num" id="adminActiveBhakts">-</span><span class="lbl">Active This Week</span></div>
+    </div>
+    <div class="admin-table">
+      <h3>👥 ALL BHAKTS</h3>
+      <div id="adminUsersList"><div class="loading"><div class="spinner"></div> Loading...</div></div>
+    </div>
+    <div class="announcement-form">
+      <h3>📢 POST ANNOUNCEMENT</h3>
+      <div class="form-group"><label>Announcement Title</label><input type="text" id="announcementTitle" placeholder="e.g. Special Satsang this Sunday..."></div>
+      <div class="form-group"><label>Message</label><textarea id="announcementMsg" placeholder="Write your announcement for all bhakts..."></textarea></div>
+      <button class="btn-full" onclick="postAnnouncement()">📢 Post to All Bhakts</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, getDocs, addDoc, collection, query, orderBy, limit, where, updateDoc, increment, serverTimestamp, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAuEWdWNd8ygqg6F4dP70E_iWlsMmoZ1GI",
+  authDomain: "harivanshi-sadhna-bhakti.firebaseapp.com",
+  projectId: "harivanshi-sadhna-bhakti",
+  storageBucket: "harivanshi-sadhna-bhakti.firebasestorage.app",
+  messagingSenderId: "129433987275",
+  appId: "1:129433987275:web:6b7cb40aaa01243f5b534e"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// ⚠️ IMPORTANT: Change this to YOUR email — this gives you admin access
+const ADMIN_EMAIL = "hmkgamer190@gmail.com";
+
+let currentUser = null;
+let currentUserData = null;
+let malaCount = 11;
+
+window.loginUser = loginUser;
+window.signupUser = signupUser;
+window.logout = logout;
+window.showPage = showPage;
+window.submitReport = submitReport;
+window.loadCommunity = loadCommunity;
+window.changeMala = changeMala;
+window.updateMalaSection = updateMalaSection;
+window.postAnnouncement = postAnnouncement;
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    currentUser = user;
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    if (userDoc.exists()) currentUserData = userDoc.data();
+    document.getElementById('mainNav').style.display = 'block';
+    document.getElementById('dashNavBtn').textContent = `📿 ${currentUserData?.name?.split(' ')[0] || 'My Sadhna'}`;
+    if (user.email === ADMIN_EMAIL) document.getElementById('adminNavBtn').style.display = 'inline-block';
+    showPage('dashboard');
+    loadDashboard();
+  } else {
+    currentUser = null;
+    currentUserData = null;
+    document.getElementById('mainNav').style.display = 'none';
+    showPage('home');
+  }
+});
+
+window.showPage = function(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  window.scrollTo(0, 0);
+  if (page === 'community') loadCommunity('all');
+  if (page === 'leaderboard') loadLeaderboard();
+  if (page === 'admin' && currentUser?.email === ADMIN_EMAIL) loadAdmin();
+  if (page === 'sadhna') checkTodayForForm();
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function getTodayStr() { return new Date().toISOString().split('T')[0]; }
+
+async function signupUser() {
+  const name = document.getElementById('signupName').value.trim();
+  const email = document.getElementById('signupEmail').value.trim();
+  const pass = document.getElementById('signupPassword').value;
+  const city = document.getElementById('signupCity').value.trim();
+  const errEl = document.getElementById('signupError');
+  const sucEl = document.getElementById('signupSuccess');
+  const btn = document.getElementById('signupBtn');
+  errEl.style.display = 'none'; sucEl.style.display = 'none';
+  if (!name || !email || !pass) { errEl.textContent = 'Please fill all required fields'; errEl.style.display = 'block'; return; }
+  btn.disabled = true; btn.textContent = '🙏 Joining Sangha...';
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    await setDoc(doc(db, "users", cred.user.uid), {
+      name, email, city, joinedAt: serverTimestamp(),
+      streak: 0, totalReports: 0, totalMalas: 0, lastReportDate: null, isAdmin: email === ADMIN_EMAIL
+    });
+    sucEl.textContent = '🙏 Jay Harivansh! Welcome to the Sangha, ' + name + '!';
+    sucEl.style.display = 'block';
+  } catch(e) {
+    errEl.textContent = e.message.includes('email-already-in-use') ? 'Email already registered!' : e.message;
+    errEl.style.display = 'block';
+    btn.disabled = false; btn.textContent = '🙏 Join Sangha';
+  }
+}
+
+async function loginUser() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPassword').value;
+  const errEl = document.getElementById('loginError');
+  const btn = document.getElementById('loginBtn');
+  errEl.style.display = 'none'; btn.disabled = true; btn.textContent = '🙏 Logging in...';
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+    showToast('🙏 Jay Harivansh! Welcome back!');
+  } catch(e) {
+    errEl.textContent = 'Invalid email or password. Please try again.';
+    errEl.style.display = 'block';
+    btn.disabled = false; btn.textContent = '🙏 Login';
+  }
+}
+
+async function logout() { await signOut(auth); showToast('Jai Harivansh! See you tomorrow 🙏'); }
+
+window.changeMala = function(delta) {
+  malaCount = Math.max(0, Math.min(108, malaCount + delta));
+  document.getElementById('malaCount').textContent = malaCount;
+  document.getElementById('malaTarget').textContent = malaCount >= 11 ? `${malaCount} Mala ✅` : `${malaCount} Mala (Target: 11)`;
+}
+
+window.updateMalaSection = function() {
+  document.getElementById('malaSection').style.display = document.getElementById('check_mala').checked ? 'block' : 'none';
+}
+
+async function checkTodayForForm() {
+  if (!currentUser) return;
+  const q = query(collection(db, "reports"), where("uid", "==", currentUser.uid), where("date", "==", getTodayStr()));
+  const snap = await getDocs(q);
+  if (!snap.empty) {
+    const el = document.getElementById('sadhnaError');
+    el.textContent = "🙏 You have already submitted today's report! Jay Harivansh!";
+    el.style.display = 'block';
+    document.getElementById('submitReportBtn').disabled = true;
+    document.getElementById('submitReportBtn').textContent = '✅ Already Submitted Today';
+  }
+}
+
+async function submitReport() {
+  if (!currentUser) return;
+  const malaChecked = document.getElementById('check_mala').checked;
+  const satsangChecked = document.getElementById('check_satsang').checked;
+  const satsangName = document.getElementById('satsangName').value.trim();
+  const extra = document.getElementById('extraSadhna').value.trim();
+  const reflection = document.getElementById('reflection').value.trim();
+  const mood = document.getElementById('mood').value;
+  const errEl = document.getElementById('sadhnaError');
+  const sucEl = document.getElementById('sadhnaSuccess');
+  const btn = document.getElementById('submitReportBtn');
+  errEl.style.display = 'none'; sucEl.style.display = 'none';
+  const today = getTodayStr();
+  const existQ = query(collection(db, "reports"), where("uid", "==", currentUser.uid), where("date", "==", today));
+  const existSnap = await getDocs(existQ);
+  if (!existSnap.empty) { errEl.textContent = "🙏 Already submitted today!"; errEl.style.display = 'block'; return; }
+  btn.disabled = true; btn.textContent = '🙏 Submitting...';
+  try {
+    const yesterday = new Date(); yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayStr = yesterday.toISOString().split('T')[0];
+    let newStreak = currentUserData.lastReportDate === yesterdayStr ? (currentUserData.streak || 0) + 1 : 1;
+    const malasCompleted = malaChecked ? malaCount : 0;
+    await addDoc(collection(db, "reports"), {
+      uid: currentUser.uid, bhaktName: currentUserData.name, city: currentUserData.city || '',
+      date: today, timestamp: serverTimestamp(), malaCompleted: malaChecked, malaCount: malasCompleted,
+      satsangCompleted: satsangChecked, satsangName, extraSadhna: extra, reflection, mood,
+      streak: newStreak, fullChallenge: malaChecked && satsangChecked
+    });
+    await updateDoc(doc(db, "users", currentUser.uid), {
+      streak: newStreak, lastReportDate: today, totalReports: increment(1), totalMalas: increment(malasCompleted)
+    });
+    currentUserData.streak = newStreak; currentUserData.lastReportDate = today;
+    currentUserData.totalReports = (currentUserData.totalReports || 0) + 1;
+    currentUserData.totalMalas = (currentUserData.totalMalas || 0) + malasCompleted;
+    sucEl.textContent = `🙏 Jay Harivansh! Report submitted! Streak: ${newStreak} days! 🔥`;
+    sucEl.style.display = 'block'; btn.textContent = '✅ Report Submitted!';
+    showToast(`🔥 ${newStreak} day streak! Jay Harivansh!`);
+    setTimeout(() => { showPage('dashboard'); loadDashboard(); }, 2000);
+  } catch(e) {
+    errEl.textContent = 'Error: ' + e.message; errEl.style.display = 'block';
+    btn.disabled = false; btn.textContent = '🙏 Submit Today\'s Report';
+  }
+}
+
+async function loadDashboard() {
+  if (!currentUser || !currentUserData) return;
+  document.getElementById('dashGreeting').textContent = `🙏 Jay Harivansh, ${currentUserData.name}!`;
+  document.getElementById('dashSubtitle').textContent = `${currentUserData.city || 'Bhakt'} — Keep up your sadhna!`;
+  document.getElementById('currentStreak').textContent = currentUserData.streak || 0;
+  document.getElementById('totalReports').textContent = currentUserData.totalReports || 0;
+  document.getElementById('totalMalas').textContent = currentUserData.totalMalas || 0;
+  const streak = currentUserData.streak || 0;
+  const milestones = [{days:7,label:'🌟 7 Days'},{days:21,label:'🔥 21 Days'},{days:30,label:'🏆 30 Days'},{days:51,label:'✨ 51 Days'},{days:108,label:'🕉️ 108 Days'},{days:365,label:'🌸 365 Days'}];
+  document.getElementById('milestonesDisplay').innerHTML = milestones.map(m => `<span class="milestone-badge ${streak >= m.days ? 'earned' : ''}">${m.label}</span>`).join('');
+  const today = getTodayStr();
+  const todayQ = query(collection(db, "reports"), where("uid", "==", currentUser.uid), where("date", "==", today));
+  const todaySnap = await getDocs(todayQ);
+  const statusBar = document.getElementById('todayStatusText');
+  const todayContent = document.getElementById('todayReportContent');
+  if (!todaySnap.empty) {
+    const r = todaySnap.docs[0].data();
+    statusBar.textContent = `✅ Today's report submitted! Full challenge: ${r.fullChallenge ? 'Completed 🎉' : 'Partial'}`;
+    todayContent.innerHTML = `<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+      <span class="badge ${r.malaCompleted ? 'completed' : 'missed'}">📿 ${r.malaCompleted ? r.malaCount+' Mala ✅' : 'Mala ✗'}</span>
+      <span class="badge ${r.satsangCompleted ? 'completed' : 'missed'}">🎧 ${r.satsangCompleted ? 'Satsang ✅' : 'Satsang ✗'}</span>
+      ${r.mood ? `<span class="badge partial">${r.mood}</span>` : ''}
+    </div>
+    ${r.extraSadhna ? `<div class="report-extra">🌟 ${r.extraSadhna}</div>` : ''}
+    ${r.reflection ? `<div class="report-extra" style="margin-top:8px">💭 ${r.reflection}</div>` : ''}`;
+  } else {
+    statusBar.textContent = "⚠️ You haven't submitted today's report yet!";
+    todayContent.innerHTML = `<button class="btn-full" onclick="showPage('sadhna')" style="margin-top:8px">📿 Submit Today's Sadhna Report</button>`;
+  }
+  const recentQ = query(collection(db, "reports"), where("uid", "==", currentUser.uid), orderBy("timestamp", "desc"), limit(5));
+  const recentSnap = await getDocs(recentQ);
+  const recentEl = document.getElementById('myRecentReports');
+  if (recentSnap.empty) {
+    recentEl.innerHTML = `<div class="empty-state"><span class="icon">📿</span><p>No reports yet. Submit your first sadhna report!</p></div>`;
+  } else {
+    recentEl.innerHTML = recentSnap.docs.map(d => {
+      const r = d.data();
+      return `<div style="padding:10px 0;border-bottom:1px solid var(--border);font-size:13px">
+        <div style="color:var(--gold);margin-bottom:4px">${r.date}</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <span class="badge ${r.malaCompleted ? 'completed' : 'missed'}" style="font-size:11px">📿 ${r.malaCompleted ? r.malaCount+'M' : '✗'}</span>
+          <span class="badge ${r.satsangCompleted ? 'completed' : 'missed'}" style="font-size:11px">🎧 ${r.satsangCompleted ? '✅' : '✗'}</span>
+          <span class="streak-badge" style="font-size:10px">🔥 ${r.streak}d</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  const badges = [];
+  const totalR = currentUserData.totalReports || 0;
+  if (streak >= 7) badges.push('🌟 7-Day Warrior');
+  if (streak >= 21) badges.push('🔥 21-Day Sadhak');
+  if (streak >= 30) badges.push('🏆 30-Day Champion');
+  if (streak >= 108) badges.push('🕉️ 108-Day Mahabhakt');
+  if (totalR >= 10) badges.push('📿 10 Reports');
+  if (totalR >= 50) badges.push('📿 50 Reports');
+  if ((currentUserData.totalMalas || 0) >= 108) badges.push('✨ 108 Malas');
+  const badgesEl = document.getElementById('myBadgesDisplay');
+  badgesEl.innerHTML = badges.length === 0
+    ? `<p style="color:var(--text-muted);font-style:italic;font-size:14px">Complete your daily challenge to earn badges! 🙏</p>`
+    : badges.map(b => `<span class="milestone-badge earned" style="margin:4px;display:inline-block">${b}</span>`).join('');
+}
+
+window.loadCommunity = async function(filter = 'all', btn = null) {
+  if (btn) { document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); btn.classList.add('active'); }
+  const feedEl = document.getElementById('communityFeed');
+  feedEl.innerHTML = '<div class="loading"><div class="spinner"></div> Loading...</div>';
+  try {
+    let q = query(collection(db, "reports"), orderBy("timestamp", "desc"), limit(30));
+    if (filter === 'today') q = query(collection(db, "reports"), where("date", "==", getTodayStr()), orderBy("timestamp", "desc"));
+    else if (filter === 'week') {
+      const weekAgo = new Date(); weekAgo.setDate(weekAgo.getDate() - 7);
+      q = query(collection(db, "reports"), where("timestamp", ">=", Timestamp.fromDate(weekAgo)), orderBy("timestamp", "desc"), limit(50));
+    }
+    const snap = await getDocs(q);
+    if (snap.empty) { feedEl.innerHTML = `<div class="empty-state"><span class="icon">🕊️</span><p>No reports yet. Be the first to share your sadhna!</p></div>`; return; }
+    feedEl.innerHTML = snap.docs.map((d, i) => {
+      const r = d.data();
+      const initials = r.bhaktName ? r.bhaktName.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2) : '🙏';
+      return `<div class="report-card" style="animation-delay:${i*0.05}s">
+        <div class="report-header">
+          <div class="avatar">${initials}</div>
+          <div class="report-meta">
+            <div class="bhakt-name">${r.bhaktName || 'Bhakt'} ${r.city ? '· '+r.city : ''}</div>
+            <div class="report-date">${r.date} ${r.mood ? '· '+r.mood : ''}</div>
+          </div>
+          <span class="streak-badge">🔥 ${r.streak || 1}d</span>
+        </div>
+        <div class="report-badges">
+          <span class="badge ${r.malaCompleted ? 'completed' : 'missed'}">📿 ${r.malaCompleted ? r.malaCount+' Mala ✅' : 'Mala Not Done'}</span>
+          <span class="badge ${r.satsangCompleted ? 'completed' : 'missed'}">🎧 ${r.satsangCompleted ? 'Satsang ✅' : 'Satsang Pending'}</span>
+          ${r.fullChallenge ? '<span class="badge completed">⭐ Full Challenge!</span>' : ''}
+        </div>
+        ${r.satsangName ? `<div style="font-size:13px;color:var(--text-muted);margin-bottom:6px">🎧 ${r.satsangName}</div>` : ''}
+        ${r.extraSadhna ? `<div class="report-extra">🌟 ${r.extraSadhna}</div>` : ''}
+        ${r.reflection ? `<div class="report-extra" style="margin-top:8px;border-left-color:var(--gold)">💭 ${r.reflection}</div>` : ''}
+      </div>`;
+    }).join('');
+  } catch(e) { feedEl.innerHTML = `<div class="empty-state"><p>Error loading. Please try again.</p></div>`; }
+}
+
+async function loadLeaderboard() {
+  const el = document.getElementById('leaderboardList');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div> Loading...</div>';
+  try {
+    const q = query(collection(db, "users"), orderBy("streak", "desc"), limit(20));
+    const snap = await getDocs(q);
+    if (snap.empty) { el.innerHTML = `<div class="empty-state"><span class="icon">🏆</span><p>No bhakts yet. Be the first!</p></div>`; return; }
+    const rankIcons = ['🥇','🥈','🥉'];
+    const rankClasses = ['top-1','top-2','top-3'];
+    el.innerHTML = snap.docs.map((d, i) => {
+      const u = d.data();
+      const initials = u.name ? u.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2) : '🙏';
+      return `<div class="leaderboard-item ${i < 3 ? rankClasses[i] : ''}" style="animation-delay:${i*0.05}s">
+        <div class="rank ${i===0?'gold':i===1?'silver':i===2?'bronze':''}">${i < 3 ? rankIcons[i] : i+1}</div>
+        <div class="avatar" style="width:40px;height:40px;font-size:14px">${initials}</div>
+        <div class="lb-info">
+          <div class="lb-name">${u.name} ${u.city ? '· '+u.city : ''}</div>
+          <div class="lb-stats">📿 ${u.totalMalas||0} Malas · 📋 ${u.totalReports||0} Reports</div>
+        </div>
+        <div class="lb-streak"><span class="days">${u.streak || 0}</span><span class="days-label">🔥 days</span></div>
+      </div>`;
+    }).join('');
+  } catch(e) { el.innerHTML = `<div class="empty-state"><p>Error loading leaderboard.</p></div>`; }
+}
+
+async function loadAdmin() {
+  if (currentUser?.email !== ADMIN_EMAIL) return;
+  try {
+    const usersSnap = await getDocs(collection(db, "users"));
+    const reportsSnap = await getDocs(collection(db, "reports"));
+    const today = getTodayStr();
+    const todayReports = reportsSnap.docs.filter(d => d.data().date === today);
+    const weekAgo = new Date(); weekAgo.setDate(weekAgo.getDate() - 7);
+    const activeUids = new Set();
+    reportsSnap.docs.forEach(d => { const r = d.data(); if (r.timestamp?.toDate && r.timestamp.toDate() >= weekAgo) activeUids.add(r.uid); });
+    document.getElementById('adminTotalUsers').textContent = usersSnap.size;
+    document.getElementById('adminTodayReports').textContent = todayReports.length;
+    document.getElementById('adminTotalReports').textContent = reportsSnap.size;
+    document.getElementById('adminActiveBhakts').textContent = activeUids.size;
+    document.getElementById('adminUsersList').innerHTML = usersSnap.docs.map(d => {
+      const u = d.data();
+      return `<div class="table-row">
+        <div class="avatar" style="width:36px;height:36px;font-size:13px">${u.name?.slice(0,2).toUpperCase()||'??'}</div>
+        <div class="tr-name">${u.name}</div>
+        <div class="tr-email">${u.email}</div>
+        <div class="tr-streak">🔥 ${u.streak||0}d</div>
+      </div>`;
+    }).join('');
+  } catch(e) { console.error(e); }
+}
+
+async function postAnnouncement() {
+  const title = document.getElementById('announcementTitle').value.trim();
+  const msg = document.getElementById('announcementMsg').value.trim();
+  if (!title || !msg) { showToast('Please fill title and message'); return; }
+  await addDoc(collection(db, "announcements"), { title, message: msg, postedBy: currentUserData?.name || 'Admin', timestamp: serverTimestamp() });
+  showToast('📢 Announcement posted! Jay Harivansh!');
+  document.getElementById('announcementTitle').value = '';
+  document.getElementById('announcementMsg').value = '';
+}
+</script>
+</body>
+</html>
