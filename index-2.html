@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harivanshi Sadhna Bhakti</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap');
+:root{--cream:#FDF6EC;--warm-white:#FFFBF4;--saffron:#E8750A;--saffron-light:#F59340;--saffron-pale:#FDE8CC;--pink:#F2A0A0;--pink-light:#FDEAEA;--pink-pale:#FFF0F0;--text-dark:#2C1810;--text-mid:#6B3D20;--text-muted:#A0724A;--border:rgba(200,134,10,0.2);--border-pink:rgba(242,160,160,0.4);--shadow:0 4px 24px rgba(200,120,20,0.1);--shadow-hover:0 8px 40px rgba(200,120,20,0.18);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Jost',Georgia,sans-serif;background:var(--cream);color:var(--text-dark);min-height:100vh;font-weight:300;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 10% 0%,rgba(242,160,160,0.12) 0%,transparent 50%),radial-gradient(ellipse at 90% 100%,rgba(232,117,10,0.08) 0%,transparent 50%);pointer-events:none;z-index:0;}
+.page{display:none;position:relative;z-index:1;min-height:100vh;}.page.active{display:block;}
+nav{background:rgba(253,246,236,0.95);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:200;backdrop-filter:blur(16px);}
+.nav-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px;gap:8px;}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;color:var(--saffron);line-height:1.2;}
+.nav-brand small{display:block;font-family:'Jost',sans-serif;font-size:8px;color:var(--text-muted);letter-spacing:3px;font-weight:400;text-transform:uppercase;}
+.nav-links{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+.nb{background:none;border:1px solid var(--border);color:var(--text-mid);padding:5px 12px;border-radius:20px;font-family:'Jost',sans-serif;font-size:12px;cursor:pointer;transition:all 0.25s;}
+.nb:hover{background:var(--saffron-pale);border-color:var(--saffron-light);color:var(--saffron);}
+.nb.gold{background:var(--saffron);border-color:var(--saffron);color:white;font-weight:500;}
+.nb.gold:hover{background:var(--saffron-light);}
+.hero{text-align:center;padding:80px 24px 60px;max-width:700px;margin:0 auto;}
+.om-wrap{width:90px;height:90px;background:linear-gradient(135deg,var(--saffron-pale),var(--pink-pale));border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;font-size:44px;animation:float 4s ease-in-out infinite;border:1px solid var(--border-pink);box-shadow:0 8px 32px rgba(232,117,10,0.12);}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,6vw,48px);font-weight:500;color:var(--text-dark);line-height:1.2;margin-bottom:12px;}
+.hero h1 span{color:var(--saffron);}
+.hero p{font-size:15px;color:var(--text-muted);margin-bottom:36px;line-height:1.7;font-style:italic;}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-saffron{background:var(--saffron);color:white;border:none;padding:13px 32px;border-radius:30px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 20px rgba(232,117,10,0.3);}
+.btn-saffron:hover{background:var(--saffron-light);transform:translateY(-2px);}
+.btn-outline{background:white;color:var(--saffron);border:1.5px solid var(--saffron);padding:13px 32px;border-radius:30px;font-family:'Jost',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.3s;}
+.btn-outline:hover{background:var(--saffron-pale);transform:translateY(-2px);}
+.btn-full{width:100%;background:var(--saffron);color:white;border:none;padding:14px;border-radius:12px;font-family:'Jost',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:all 0.3s;margin-top:6px;box-shadow:0 4px 16px rgba(232,117,10,0.25);}
+.btn-full:hover{background:var(--saffron-light);transform:translateY(-1px);}
+.btn-full:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
+.section-label{text-align:center;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--text-muted);margin-bottom:40px;font-weight:500;}
+.features-wrap{max-width:960px;margin:0 auto;padding:60px 24px;}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+.feat-card{background:white;border:1px solid var(--border);border-radius:20px;padding:28px 24px;transition:all 0.3s;position:relative;overflow:hidden;}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--saffron),var(--pink));opacity:0;transition:opacity 0.3s;}
+.feat-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);}
+.feat-card:hover::before{opacity:1;}
+.feat-icon{width:48px;height:48px;background:var(--saffron-pale);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;}
+.feat-card h3{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--text-dark);margin-bottom:6px;}
+.feat-card p{font-size:13px;color:var(--text-muted);line-height:1.6;}
+.divider{text-align:center;padding:16px;color:var(--saffron-light);font-size:18px;letter-spacing:16px;opacity:0.6;}
+.auth-wrap{max-width:420px;margin:60px auto;padding:20px;}
+.auth-card{background:white;border:1px solid var(--border);border-radius:28px;padding:40px 36px;box-shadow:var(--shadow);}
+.auth-om{width:64px;height:64px;background:linear-gradient(135deg,var(--saffron-pale),var(--pink-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 20px;}
+.auth-card h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--text-dark);text-align:center;margin-bottom:4px;}
+.auth-card .sub{text-align:center;font-size:13px;color:var(--text-muted);margin-bottom:28px;font-style:italic;}
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;font-size:11px;font-weight:500;color:var(--text-mid);margin-bottom:6px;letter-spacing:1.5px;text-transform:uppercase;}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:var(--cream);border:1.5px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text-dark);font-family:'Jost',sans-serif;font-size:14px;font-weight:300;outline:none;transition:border-color 0.2s;}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--saffron-light);background:white;}
+.form-group textarea{resize:vertical;min-height:80px;}
+.form-group select{cursor:pointer;}
+.form-group select option{background:white;}
+.auth-switch{text-align:center;margin-top:18px;font-size:13px;color:var(--text-muted);}
+.auth-switch a{color:var(--saffron);cursor:pointer;font-weight:500;}
+.err{background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:10px 14px;font-size:13px;color:#DC2626;margin-bottom:14px;display:none;}
+.suc{background:#F0FDF4;border:1px solid #BBF7D0;border-radius:10px;padding:10px 14px;font-size:13px;color:#16A34A;margin-bottom:14px;display:none;}
+.dash-top{background:linear-gradient(135deg,var(--saffron-pale) 0%,var(--pink-pale) 100%);border-bottom:1px solid var(--border-pink);padding:32px 24px;text-align:center;}
+.dash-top h2{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--text-dark);margin-bottom:4px;}
+.dash-top p{font-size:13px;color:var(--text-muted);font-style:italic;}
+.stats-row{display:flex;justify-content:center;gap:12px;margin-top:20px;flex-wrap:wrap;}
+.stat-pill{background:white;border:1px solid var(--border);border-radius:16px;padding:12px 20px;text-align:center;box-shadow:0 2px 12px rgba(200,120,20,0.08);min-width:90px;}
+.stat-pill .n{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--saffron);display:block;line-height:1;}
+.stat-pill .l{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;display:block;}
+.ms-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px;}
+.ms{padding:4px 14px;border-radius:20px;font-size:11px;border:1px solid var(--border);color:var(--text-muted);background:white;}
+.ms.on{background:linear-gradient(135deg,var(--saffron),var(--saffron-light));border:none;color:white;font-weight:500;}
+.dash-grid{max-width:960px;margin:0 auto;padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:600px){.dash-grid{grid-template-columns:1fr;}}
+.card{background:white;border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:0 2px 12px rgba(200,120,20,0.06);}
+.card h3{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;}
+.today-bar{background:linear-gradient(135deg,var(--saffron-pale),var(--pink-pale));border:1px solid var(--border-pink);border-radius:12px;padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text-mid);}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--saffron);flex-shrink:0;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.4)}}
+.form-wrap{max-width:600px;margin:0 auto;padding:32px 24px;}
+.page-title{text-align:center;margin-bottom:28px;}
+.page-title .icon-circle{width:64px;height:64px;background:linear-gradient(135deg,var(--saffron-pale),var(--pink-light));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 14px;}
+.page-title h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--text-dark);margin-bottom:4px;}
+.page-title p{font-size:13px;color:var(--text-muted);font-style:italic;}
+.check-card{background:white;border:1px solid var(--border);border-radius:20px;padding:22px;margin-bottom:20px;box-shadow:0 2px 12px rgba(200,120,20,0.06);}
+.check-card h3{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;}
+.check-row{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid rgba(200,134,10,0.1);}
+.check-row:last-child{border-bottom:none;padding-bottom:0;}
+.check-row input[type="checkbox"]{width:20px;height:20px;accent-color:var(--saffron);cursor:pointer;flex-shrink:0;margin-top:2px;}
+.check-row label{font-size:15px;color:var(--text-dark);cursor:pointer;line-height:1.4;}
+.check-row label small{display:block;color:var(--text-muted);font-size:12px;font-style:italic;margin-top:2px;}
+.mala-row{display:flex;align-items:center;gap:14px;justify-content:center;padding:10px 0;}
+.mb{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--saffron);background:white;color:var(--saffron);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.mb:hover{background:var(--saffron);color:white;}
+.mn{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--saffron);min-width:40px;text-align:center;}
+.mh{font-size:11px;color:var(--text-muted);text-align:center;}
+.community-wrap{max-width:700px;margin:0 auto;padding:32px 24px;}
+.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:24px;flex-wrap:wrap;}
+.tab{padding:7px 20px;border-radius:20px;border:1px solid var(--border);background:white;color:var(--text-muted);font-family:'Jost',sans-serif;font-size:13px;cursor:pointer;transition:all 0.2s;}
+.tab.on{background:var(--saffron);border-color:var(--saffron);color:white;}
+.rcard{background:white;border:1px solid var(--border);border-radius:20px;padding:20px;margin-bottom:14px;box-shadow:0 2px 12px rgba(200,120,20,0.06);animation:slideUp 0.3s ease both;}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.rcard:hover{border-color:var(--saffron-light);box-shadow:var(--shadow);}
+.rhead{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--saffron-pale),var(--pink-light));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:var(--saffron);flex-shrink:0;border:1px solid var(--border);}
+.rmeta{flex:1;}.rname{font-size:14px;font-weight:500;color:var(--text-dark);}.rdate{font-size:11px;color:var(--text-muted);margin-top:1px;}
+.rpill{background:linear-gradient(135deg,var(--saffron),var(--saffron-light));color:white;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:500;white-space:nowrap;}
+.rbadges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.rbadge{padding:4px 12px;border-radius:12px;font-size:11px;font-weight:500;}
+.rbadge.ok{background:#F0FDF4;border:1px solid #BBF7D0;color:#16A34A;}
+.rbadge.no{background:#FEF2F2;border:1px solid #FECACA;color:#DC2626;}
+.rbadge.info{background:var(--saffron-pale);border:1px solid var(--border);color:var(--saffron);}
+.rquote{background:linear-gradient(135deg,var(--cream),var(--pink-pale));border-left:3px solid var(--saffron-light);padding:10px 14px;border-radius:0 10px 10px 0;font-size:13px;color:var(--text-mid);font-style:italic;line-height:1.6;margin-top:8px;}
+.lb-wrap{max-width:700px;margin:0 auto;padding:32px 24px;}
+.lb-item{display:flex;align-items:center;gap:14px;background:white;border:1px solid var(--border);border-radius:16px;padding:14px 18px;margin-bottom:10px;transition:all 0.25s;animation:slideUp 0.3s ease both;}
+.lb-item:hover{transform:translateX(4px);box-shadow:var(--shadow);}
+.lb-item.r1{border-color:#F59E0B;background:#FFFBEB;}.lb-item.r2{border-color:#9CA3AF;background:#F9FAFB;}.lb-item.r3{border-color:#D97706;background:#FFFBF0;}
+.rank{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;min-width:32px;text-align:center;color:var(--text-muted);}
+.lb-info{flex:1;}.lb-name{font-size:14px;font-weight:500;color:var(--text-dark);}.lb-stats{font-size:11px;color:var(--text-muted);margin-top:2px;}
+.lb-streak{text-align:right;}.lb-days{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--saffron);display:block;line-height:1;}.lb-lbl{font-size:9px;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;}
+.admin-wrap{max-width:960px;margin:0 auto;padding:32px 24px;}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:24px;}
+.sbox{background:white;border:1px solid var(--border);border-radius:16px;padding:18px;text-align:center;box-shadow:0 2px 10px rgba(200,120,20,0.06);}
+.sbox .sn{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:var(--saffron);display:block;}.sbox .sl{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;}
+.atable{background:white;border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:20px;}
+.atable-head{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);padding:16px 20px;border-bottom:1px solid var(--border);background:var(--cream);}
+.arow{display:flex;align-items:center;padding:12px 20px;border-bottom:1px solid rgba(200,134,10,0.07);gap:12px;}
+.arow:last-child{border-bottom:none;}.arow .an{flex:1;font-size:13px;font-weight:500;color:var(--text-dark);}.arow .ae{flex:2;font-size:12px;color:var(--text-muted);}.arow .as{font-size:13px;font-weight:600;color:var(--saffron);}
+.loading{display:flex;align-items:center;justify-content:center;padding:40px;color:var(--text-muted);font-size:13px;gap:10px;font-style:italic;}
+.spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--saffron);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{text-align:center;padding:50px 20px;color:var(--text-muted);}
+.empty .ei{font-size:40px;margin-bottom:12px;opacity:0.5;display:block;}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--text-dark);color:white;padding:12px 24px;border-radius:24px;font-size:13px;z-index:9999;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);max-width:300px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.15);}
+.toast.show{transform:translateX(-50%) translateY(0);}
+footer{text-align:center;padding:40px 20px;color:var(--text-muted);font-size:13px;border-top:1px solid var(--border);margin-top:40px;line-height:2.2;}
+.back-link{display:inline-block;margin-top:16px;font-size:13px;color:var(--text-muted);cursor:pointer;}
+.back-link:hover{color:var(--saffron);}
+</style>
+</head>
+<body>
+
+<nav id="mainNav" style="display:none">
+  <div class="nav-inner">
+    <div class="nav-brand">🪷 Harivanshi Sadhna<small>BHAKTI COMMUNITY</small></div>
+    <div class="nav-links">
+      <button class="nb" id="btn-community">🙏 Sangha</button>
+      <button class="nb" id="btn-leaderboard">🏆 Board</button>
+      <button class="nb" id="btn-dashboard">📿 My Sadhna</button>
+      <button class="nb" id="btn-admin" style="display:none">⚙️ Admin</button>
+      <button class="nb gold" id="btn-logout">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="om-wrap">🪷</div>
+    <h1>Harivanshi<br><span>Sadhna Bhakti</span></h1>
+    <p>हरिवंशी साधना भक्ति — A sacred space for devoted bhakts<br>to track, share and grow in daily spiritual practice</p>
+    <div class="hero-btns">
+      <button class="btn-saffron" id="home-signup-btn">🙏 Join the Sangha</button>
+      <button class="btn-outline" id="home-login-btn">🔑 Login</button>
+    </div>
+  </div>
+  <div class="features-wrap">
+    <p class="section-label">What we offer</p>
+    <div class="features-grid">
+      <div class="feat-card"><div class="feat-icon">📿</div><h3>11 Mala Naam Jap</h3><p>Track your daily 11 Mala Naam Jap and build a consistent spiritual streak</p></div>
+      <div class="feat-card"><div class="feat-icon">🎧</div><h3>30 Min Satsang</h3><p>Log daily satsang listening and deepen your connection with the Divine</p></div>
+      <div class="feat-card"><div class="feat-icon">🌟</div><h3>Extra Sadhna</h3><p>Share additional practices to inspire and uplift fellow bhakts</p></div>
+      <div class="feat-card"><div class="feat-icon">🏆</div><h3>Leaderboard</h3><p>Celebrate streaks of all bhakts and motivate each other to grow</p></div>
+      <div class="feat-card"><div class="feat-icon">🔥</div><h3>Streaks & Badges</h3><p>Earn milestone badges for 7, 21, 30 and 108 day achievements</p></div>
+      <div class="feat-card"><div class="feat-icon">📢</div><h3>Announcements</h3><p>Stay connected with satsang schedules and spiritual program updates</p></div>
+    </div>
+  </div>
+  <div class="divider">· · ·</div>
+  <footer>🪷<br>राधावल्लभ श्री हरिवंश 🌺<br>Harivanshi Sadhna Bhakti © 2025 — All Bhakts Welcome</footer>
+</div>
+
+<!-- LOGIN -->
+<div class="page" id="page-login">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-om">🪷</div>
+      <h2>Jai Harivansh</h2>
+      <p class="sub">Login to continue your sadhna journey</p>
+      <div class="err" id="loginErr"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="loginPassword" placeholder="Your password"></div>
+      <button class="btn-full" id="loginBtn">🙏 Login</button>
+      <div class="auth-switch">New bhakt? <a id="login-to-signup">Create account</a></div>
+      <div class="auth-switch" style="margin-top:8px"><a id="login-to-home" class="back-link">← Back to Home</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- SIGNUP -->
+<div class="page" id="page-signup">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-om">🪷</div>
+      <h2>Join the Sangha</h2>
+      <p class="sub">Begin your sacred sadhna journey today</p>
+      <div class="err" id="signupErr"></div>
+      <div class="suc" id="signupSuc"></div>
+      <div class="form-group"><label>Your Bhakt Name</label><input type="text" id="signupName" placeholder="e.g. Ram Das, Meera Devi"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Password (min 6 chars)</label><input type="password" id="signupPass" placeholder="Create a password"></div>
+      <div class="form-group"><label>City</label><input type="text" id="signupCity" placeholder="e.g. Mumbai, Vrindavan, Delhi"></div>
+      <button class="btn-full" id="signupBtn">🙏 Join Sangha</button>
+      <div class="auth-switch">Already a bhakt? <a id="signup-to-login">Login here</a></div>
+      <div class="auth-switch" style="margin-top:8px"><a id="signup-to-home" class="back-link">← Back to Home</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="page" id="page-dashboard">
+  <div class="dash-top">
+    <h2 id="dashGreet">🪷 Jai Harivansh</h2>
+    <p id="dashSub">Your personal sadhna space</p>
+    <div class="stats-row">
+      <div class="stat-pill"><span class="n" id="dStreak">0</span><span class="l">🔥 Streak</span></div>
+      <div class="stat-pill"><span class="n" id="dReports">0</span><span class="l">📋 Reports</span></div>
+      <div class="stat-pill"><span class="n" id="dMalas">0</span><span class="l">📿 Malas</span></div>
+    </div>
+    <div class="ms-row" id="dMs"></div>
+  </div>
+  <div class="dash-grid">
+    <div class="card" style="grid-column:1/-1">
+      <h3>Today's Sadhna</h3>
+      <div class="today-bar"><div class="dot"></div><span id="todayTxt">Checking...</span></div>
+      <div id="todayContent"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
+    <div class="card"><h3>Recent Reports</h3><div id="recentRep"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
+    <div class="card"><h3>My Badges</h3><div id="myBadges" style="text-align:center;padding:8px"><div class="loading"><div class="spinner"></div>Loading...</div></div></div>
+  </div>
+</div>
+
+<!-- SADHNA FORM -->
+<div class="page" id="page-sadhna">
+  <div class="form-wrap">
+    <div class="page-title">
+      <div class="icon-circle">📿</div>
+      <h2>Daily Sadhna Report</h2>
+      <p>Record your sacred practice for today</p>
+    </div>
+    <div class="err" id="sadhnaErr"></div>
+    <div class="suc" id="sadhnaSuc"></div>
+    <div class="check-card">
+      <h3>Daily Challenge</h3>
+      <div class="check-row">
+        <input type="checkbox" id="checkMala" onchange="toggleMala()">
+        <label for="checkMala">📿 11 Mala Naam Jap Completed<small>Complete 11 rounds of Naam Jap on your mala</small></label>
+      </div>
+      <div id="malaSection" style="display:none;padding:8px 0 4px">
+        <div style="font-size:11px;color:var(--text-muted);text-align:center;margin-bottom:6px">How many malas completed?</div>
+        <div class="mala-row">
+          <button class="mb" onclick="changeMala(-1)">−</button>
+          <span class="mn" id="malaNum">11</span>
+          <button class="mb" onclick="changeMala(1)">+</button>
+        </div>
+        <div class="mh" id="malaHint">11 Mala ✓ Target met</div>
+      </div>
+      <div class="check-row">
+        <input type="checkbox" id="checkSatsang">
+        <label for="checkSatsang">🎧 30 Minutes Satsang Listened<small>Listen to spiritual discourse or pravachan</small></label>
+      </div>
+      <div class="form-group" style="margin-top:14px;margin-bottom:0">
+        <label>Which Satsang did you listen to?</label>
+        <input type="text" id="satsangName" placeholder="e.g. Bhagavat Katha, Ramayana Pravachan...">
+      </div>
+    </div>
+    <div class="check-card">
+      <h3>Reflections</h3>
+      <div class="form-group"><label>🌟 Extra Sadhna (Optional)</label><textarea id="extraSadhna" placeholder="Any additional practices today?&#10;e.g. Temple visit, Gita reading, Seva, Bhajan..."></textarea></div>
+      <div class="form-group"><label>💭 Bhakti Reflection (Optional)</label><textarea id="reflection" placeholder="Share a thought to inspire other bhakts..."></textarea></div>
+      <div class="form-group" style="margin-bottom:0">
+        <label>🌸 Your Spiritual Mood</label>
+        <select id="mood">
+          <option value="">Select your mood today...</option>
+          <option value="🌟 Blissful">🌟 Blissful — Ananda</option>
+          <option value="🙏 Devoted">🙏 Devoted — Bhakti Bhav</option>
+          <option value="😌 Peaceful">😌 Peaceful — Shanti</option>
+          <option value="💪 Strong">💪 Strong — Shakti</option>
+          <option value="🤔 Struggling">🤔 Struggling — but trying</option>
+          <option value="🔥 Intense">🔥 Intense — Tapasya mood</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-full" id="submitBtn">🙏 Submit Today's Report</button>
+    <div style="text-align:center;margin-top:14px"><a class="back-link" id="sadhna-back">← Back to Dashboard</a></div>
+  </div>
+</div>
+
+<!-- COMMUNITY -->
+<div class="page" id="page-community">
+  <div class="community-wrap">
+    <div class="page-title">
+      <div class="icon-circle">🕊️</div>
+      <h2>Bhakti Sangha</h2>
+      <p>Be inspired by fellow bhakts' daily sadhna</p>
+    </div>
+    <div class="tabs">
+      <button class="tab on" onclick="loadFeed('all',this)">All Reports</button>
+      <button class="tab" onclick="loadFeed('today',this)">Today</button>
+      <button class="tab" onclick="loadFeed('week',this)">This Week</button>
+    </div>
+    <div id="feedEl"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+  </div>
+</div>
+
+<!-- LEADERBOARD -->
+<div class="page" id="page-leaderboard">
+  <div class="lb-wrap">
+    <div class="page-title">
+      <div class="icon-circle">🏆</div>
+      <h2>Sadhna Leaderboard</h2>
+      <p>Bhakts with the highest sadhna streaks</p>
+    </div>
+    <div id="lbEl"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="page" id="page-admin">
+  <div class="admin-wrap">
+    <div class="page-title">
+      <div class="icon-circle">⚙️</div>
+      <h2>Admin Dashboard</h2>
+      <p>Manage the Harivanshi Sadhna community</p>
+    </div>
+    <div class="stat-grid">
+      <div class="sbox"><span class="sn" id="aTU">-</span><span class="sl">Total Bhakts</span></div>
+      <div class="sbox"><span class="sn" id="aTR">-</span><span class="sl">Reports Today</span></div>
+      <div class="sbox"><span class="sn" id="aAR">-</span><span class="sl">Total Reports</span></div>
+      <div class="sbox"><span class="sn" id="aAB">-</span><span class="sl">Active This Week</span></div>
+    </div>
+    <div class="atable">
+      <div class="atable-head">All Bhakts</div>
+      <div id="aUsers"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
+    <div class="check-card">
+      <h3>Post Announcement</h3>
+      <div class="form-group"><label>Title</label><input type="text" id="annTitle" placeholder="e.g. Special Satsang this Sunday..."></div>
+      <div class="form-group"><label>Message</label><textarea id="annMsg" placeholder="Write your announcement for all bhakts..."></textarea></div>
+      <button class="btn-full" id="postAnnBtn">📢 Post Announcement</button>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, getDocs, addDoc, collection, query, orderBy, limit, where, updateDoc, increment, serverTimestamp, Timestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const cfg={apiKey:"AIzaSyAuEWdWNd8ygqg6F4dP70E_iWlsMmoZ1GI",authDomain:"harivanshi-sadhna-bhakti.firebaseapp.com",projectId:"harivanshi-sadhna-bhakti",storageBucket:"harivanshi-sadhna-bhakti.firebasestorage.app",messagingSenderId:"129433987275",appId:"1:129433987275:web:6b7cb40aaa01243f5b534e"};
+const ADMIN="hmkgamer190@gmail.com";
+const app=initializeApp(cfg);const auth=getAuth(app);const db=getFirestore(app);
+let U=null,UD=null,MC=11;
+
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+function today(){return new Date().toISOString().split('T')[0];}
+
+function goPage(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  window.scrollTo(0,0);
+  if(p==='community')loadFeed('all');
+  if(p==='leaderboard')loadLB();
+  if(p==='admin')loadAdmin();
+  if(p==='sadhna')checkDone();
+}
+
+// All button wiring
+document.getElementById('home-signup-btn').onclick=()=>goPage('signup');
+document.getElementById('home-login-btn').onclick=()=>goPage('login');
+document.getElementById('login-to-signup').onclick=()=>goPage('signup');
+document.getElementById('login-to-home').onclick=()=>goPage('home');
+document.getElementById('signup-to-login').onclick=()=>goPage('login');
+document.getElementById('signup-to-home').onclick=()=>goPage('home');
+document.getElementById('sadhna-back').onclick=()=>goPage('dashboard');
+document.getElementById('btn-community').onclick=()=>goPage('community');
+document.getElementById('btn-leaderboard').onclick=()=>goPage('leaderboard');
+document.getElementById('btn-dashboard').onclick=()=>goPage('dashboard');
+document.getElementById('btn-admin').onclick=()=>goPage('admin');
+document.getElementById('btn-logout').onclick=()=>{signOut(auth);toast('Jai Harivansh! 🪷');};
+document.getElementById('loginBtn').onclick=doLogin;
+document.getElementById('signupBtn').onclick=doSignup;
+document.getElementById('submitBtn').onclick=submitReport;
+document.getElementById('postAnnBtn').onclick=postAnn;
+
+window.toggleMala=()=>{document.getElementById('malaSection').style.display=document.getElementById('checkMala').checked?'block':'none';};
+window.changeMala=(d)=>{MC=Math.max(0,Math.min(108,MC+d));document.getElementById('malaNum').textContent=MC;document.getElementById('malaHint').textContent=MC>=11?MC+' Mala ✓ Target met':MC+' Mala (Need 11)';};
+window.loadFeed=loadFeed;
+
+onAuthStateChanged(auth,async(user)=>{
+  if(user){
+    U=user;
+    try{const s=await getDoc(doc(db,'users',user.uid));if(s.exists())UD=s.data();}catch(e){}
+    document.getElementById('mainNav').style.display='block';
+    document.getElementById('btn-dashboard').textContent='📿 '+(UD?.name?.split(' ')[0]||'Sadhna');
+    if(user.email===ADMIN)document.getElementById('btn-admin').style.display='inline-block';
+    goPage('dashboard');loadDash();
+  }else{
+    U=null;UD=null;
+    document.getElementById('mainNav').style.display='none';
+    goPage('home');
+  }
+});
+
+async function doSignup(){
+  const name=document.getElementById('signupName').value.trim();
+  const email=document.getElementById('signupEmail').value.trim();
+  const pass=document.getElementById('signupPass').value;
+  const city=document.getElementById('signupCity').value.trim();
+  const err=document.getElementById('signupErr');
+  const suc=document.getElementById('signupSuc');
+  const btn=document.getElementById('signupBtn');
+  err.style.display='none';suc.style.display='none';
+  if(!name||!email||!pass){err.textContent='Please fill Name, Email and Password';err.style.display='block';return;}
+  if(pass.length<6){err.textContent='Password must be at least 6 characters';err.style.display='block';return;}
+  btn.disabled=true;btn.textContent='Joining...';
+  try{
+    const c=await createUserWithEmailAndPassword(auth,email,pass);
+    await setDoc(doc(db,'users',c.user.uid),{name,email,city:city||'',joinedAt:serverTimestamp(),streak:0,totalReports:0,totalMalas:0,lastReportDate:''});
+    suc.textContent='🪷 Jay Harivansh! Welcome '+name+'!';suc.style.display='block';
+  }catch(e){
+    err.textContent=e.code==='auth/email-already-in-use'?'Email already registered. Please login.':e.code==='auth/invalid-email'?'Please enter a valid email.':'Error: '+e.message;
+    err.style.display='block';btn.disabled=false;btn.textContent='🙏 Join Sangha';
+  }
+}
+
+async function doLogin(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPassword').value;
+  const err=document.getElementById('loginErr');
+  const btn=document.getElementById('loginBtn');
+  err.style.display='none';
+  if(!email||!pass){err.textContent='Please enter email and password';err.style.display='block';return;}
+  btn.disabled=true;btn.textContent='Logging in...';
+  try{await signInWithEmailAndPassword(auth,email,pass);toast('🪷 Jay Harivansh! Welcome back!');}
+  catch(e){err.textContent='Wrong email or password. Please try again.';err.style.display='block';btn.disabled=false;btn.textContent='🙏 Login';}
+}
+
+async function checkDone(){
+  if(!U)return;
+  const q=query(collection(db,'reports'),where('uid','==',U.uid),where('date','==',today()));
+  const s=await getDocs(q);
+  if(!s.empty){
+    document.getElementById('sadhnaErr').textContent='🪷 Already submitted today! Jay Harivansh!';
+    document.getElementById('sadhnaErr').style.display='block';
+    document.getElementById('submitBtn').disabled=true;
+    document.getElementById('submitBtn').textContent='✅ Already Submitted Today';
+  }
+}
+
+async function submitReport(){
+  if(!U)return;
+  const malaOk=document.getElementById('checkMala').checked;
+  const satsangOk=document.getElementById('checkSatsang').checked;
+  const satsangName=document.getElementById('satsangName').value.trim();
+  const extra=document.getElementById('extraSadhna').value.trim();
+  const refl=document.getElementById('reflection').value.trim();
+  const mood=document.getElementById('mood').value;
+  const err=document.getElementById('sadhnaErr');
+  const suc=document.getElementById('sadhnaSuc');
+  const btn=document.getElementById('submitBtn');
+  err.style.display='none';suc.style.display='none';
+  const t=today();
+  const eq=query(collection(db,'reports'),where('uid','==',U.uid),where('date','==',t));
+  const es=await getDocs(eq);
+  if(!es.empty){err.textContent='Already submitted today!';err.style.display='block';return;}
+  btn.disabled=true;btn.textContent='Submitting...';
+  try{
+    const y=new Date();y.setDate(y.getDate()-1);const yS=y.toISOString().split('T')[0];
+    const ns=UD.lastReportDate===yS?(UD.streak||0)+1:1;
+    const malas=malaOk?MC:0;
+    await addDoc(collection(db,'reports'),{uid:U.uid,bhaktName:UD.name,city:UD.city||'',date:t,timestamp:serverTimestamp(),malaCompleted:malaOk,malaCount:malas,satsangCompleted:satsangOk,satsangName,extraSadhna:extra,reflection:refl,mood,streak:ns,fullChallenge:malaOk&&satsangOk});
+    await updateDoc(doc(db,'users',U.uid),{streak:ns,lastReportDate:t,totalReports:increment(1),totalMalas:increment(malas)});
+    UD.streak=ns;UD.lastReportDate=t;UD.totalReports=(UD.totalReports||0)+1;UD.totalMalas=(UD.totalMalas||0)+malas;
+    suc.textContent='🪷 Jay Harivansh! Streak: '+ns+' days! 🔥';suc.style.display='block';btn.textContent='✅ Report Submitted!';
+    toast('🔥 '+ns+' day streak! Jay Harivansh!');
+    setTimeout(()=>{goPage('dashboard');loadDash();},2000);
+  }catch(e){err.textContent='Error: '+e.message;err.style.display='block';btn.disabled=false;btn.textContent='🙏 Submit Today\'s Report';}
+}
+
+async function loadDash(){
+  if(!U||!UD)return;
+  document.getElementById('dashGreet').textContent='🪷 Jay Harivansh, '+UD.name+'!';
+  document.getElementById('dashSub').textContent=(UD.city||'Bhakt')+' — Keep shining in your sadhna';
+  document.getElementById('dStreak').textContent=UD.streak||0;
+  document.getElementById('dReports').textContent=UD.totalReports||0;
+  document.getElementById('dMalas').textContent=UD.totalMalas||0;
+  const s=UD.streak||0;
+  document.getElementById('dMs').innerHTML=[{d:7,l:'🌟 7 Days'},{d:21,l:'🔥 21 Days'},{d:30,l:'🏆 30 Days'},{d:108,l:'🪷 108 Days'}].map(m=>`<span class="ms ${s>=m.d?'on':''}">${m.l}</span>`).join('');
+  const tq=query(collection(db,'reports'),where('uid','==',U.uid),where('date','==',today()));
+  const ts=await getDocs(tq);
+  if(!ts.empty){
+    const r=ts.docs[0].data();
+    document.getElementById('todayTxt').textContent='✓ Submitted today! '+(r.fullChallenge?'Full challenge completed 🎉':'Partial completion');
+    document.getElementById('todayContent').innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px"><span class="rbadge ${r.malaCompleted?'ok':'no'}">📿 ${r.malaCompleted?r.malaCount+' Mala ✓':'Mala not done'}</span><span class="rbadge ${r.satsangCompleted?'ok':'no'}">🎧 ${r.satsangCompleted?'Satsang ✓':'Satsang pending'}</span>${r.mood?`<span class="rbadge info">${r.mood}</span>`:''}</div>${r.extraSadhna?`<div class="rquote">🌟 ${r.extraSadhna}</div>`:''}${r.reflection?`<div class="rquote" style="margin-top:6px;border-left-color:var(--pink)">💭 ${r.reflection}</div>`:''}`;
+  }else{
+    document.getElementById('todayTxt').textContent='You have not submitted today yet';
+    document.getElementById('todayContent').innerHTML=`<button class="btn-full" id="goSadhnaBtn" style="margin-top:6px">📿 Submit Today\'s Sadhna Report</button>`;
+    setTimeout(()=>{const b=document.getElementById('goSadhnaBtn');if(b)b.onclick=()=>goPage('sadhna');},100);
+  }
+  const rq=query(collection(db,'reports'),where('uid','==',U.uid),orderBy('timestamp','desc'),limit(5));
+  const rs=await getDocs(rq);
+  document.getElementById('recentRep').innerHTML=rs.empty?`<div class="empty"><span class="ei">📿</span><p style="font-size:13px">No reports yet!</p></div>`:rs.docs.map(d=>{const r=d.data();return `<div style="padding:9px 0;border-bottom:1px solid rgba(200,134,10,0.08);font-size:12px"><div style="color:var(--saffron);margin-bottom:4px;font-weight:500">${r.date}</div><div style="display:flex;gap:5px;flex-wrap:wrap"><span class="rbadge ${r.malaCompleted?'ok':'no'}" style="font-size:10px">📿${r.malaCompleted?r.malaCount+'M':'✗'}</span><span class="rbadge ${r.satsangCompleted?'ok':'no'}" style="font-size:10px">🎧${r.satsangCompleted?'✓':'✗'}</span><span class="rpill" style="font-size:9px">🔥${r.streak}d</span></div></div>`;}).join('');
+  const badges=[];const tr=UD.totalReports||0;
+  if(s>=7)badges.push('🌟 7-Day Warrior');if(s>=21)badges.push('🔥 21-Day Sadhak');if(s>=30)badges.push('🏆 30-Day Champion');if(s>=108)badges.push('🪷 108-Day Mahabhakt');if(tr>=10)badges.push('📿 10 Reports');if(tr>=50)badges.push('📿 50 Reports');
+  document.getElementById('myBadges').innerHTML=badges.length?badges.map(b=>`<span class="ms on" style="margin:4px;display:inline-block">${b}</span>`).join(''):`<p style="font-size:13px;color:var(--text-muted);font-style:italic">Complete daily sadhna to earn badges 🙏</p>`;
+}
+
+async function loadFeed(filter='all',btn=null){
+  if(btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');}
+  const el=document.getElementById('feedEl');
+  el.innerHTML='<div class="loading"><div class="spinner"></div>Loading...</div>';
+  try{
+    let q=query(collection(db,'reports'),orderBy('timestamp','desc'),limit(30));
+    if(filter==='today')q=query(collection(db,'reports'),where('date','==',today()),orderBy('timestamp','desc'));
+    else if(filter==='week'){const w=new Date();w.setDate(w.getDate()-7);q=query(collection(db,'reports'),where('timestamp','>=',Timestamp.fromDate(w)),orderBy('timestamp','desc'),limit(50));}
+    const s=await getDocs(q);
+    if(s.empty){el.innerHTML=`<div class="empty"><span class="ei">🕊️</span><p style="font-size:13px">No reports yet. Be the first!</p></div>`;return;}
+    el.innerHTML=s.docs.map((d,i)=>{const r=d.data();const ini=r.bhaktName?r.bhaktName.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2):'🙏';return `<div class="rcard" style="animation-delay:${i*0.04}s"><div class="rhead"><div class="av">${ini}</div><div class="rmeta"><div class="rname">${r.bhaktName||'Bhakt'}${r.city?' · '+r.city:''}</div><div class="rdate">${r.date}${r.mood?' · '+r.mood:''}</div></div><span class="rpill">🔥 ${r.streak||1}d</span></div><div class="rbadges"><span class="rbadge ${r.malaCompleted?'ok':'no'}">📿 ${r.malaCompleted?r.malaCount+' Mala ✓':'Mala not done'}</span><span class="rbadge ${r.satsangCompleted?'ok':'no'}">🎧 ${r.satsangCompleted?'Satsang ✓':'Satsang pending'}</span>${r.fullChallenge?'<span class="rbadge info">⭐ Full Challenge</span>':''}</div>${r.satsangName?`<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">🎧 ${r.satsangName}</div>`:''}${r.extraSadhna?`<div class="rquote">🌟 ${r.extraSadhna}</div>`:''}${r.reflection?`<div class="rquote" style="margin-top:6px;border-left-color:var(--pink)">💭 ${r.reflection}</div>`:''}</div>`;}).join('');
+  }catch(e){el.innerHTML=`<div class="empty"><p style="font-size:13px">Error loading. Please try again.</p></div>`;}
+}
+
+async function loadLB(){
+  const el=document.getElementById('lbEl');
+  el.innerHTML='<div class="loading"><div class="spinner"></div>Loading...</div>';
+  try{
+    const q=query(collection(db,'users'),orderBy('streak','desc'),limit(20));
+    const s=await getDocs(q);
+    if(s.empty){el.innerHTML=`<div class="empty"><span class="ei">🏆</span><p style="font-size:13px">No bhakts yet!</p></div>`;return;}
+    el.innerHTML=s.docs.map((d,i)=>{const u=d.data();const ini=u.name?u.name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2):'🙏';const rc=['r1','r2','r3'];const ri=['🥇','🥈','🥉'];return `<div class="lb-item ${i<3?rc[i]:''}" style="animation-delay:${i*0.04}s"><div class="rank">${i<3?ri[i]:i+1}</div><div class="av" style="width:38px;height:38px;font-size:13px">${ini}</div><div class="lb-info"><div class="lb-name">${u.name}${u.city?' · '+u.city:''}</div><div class="lb-stats">📿 ${u.totalMalas||0} Malas · 📋 ${u.totalReports||0} Reports</div></div><div class="lb-streak"><span class="lb-days">${u.streak||0}</span><span class="lb-lbl">🔥 days</span></div></div>`;}).join('');
+  }catch(e){el.innerHTML=`<div class="empty"><p style="font-size:13px">Error loading.</p></div>`;}
+}
+
+async function loadAdmin(){
+  if(U?.email!==ADMIN)return;
+  try{
+    const us=await getDocs(collection(db,'users'));
+    const rs=await getDocs(collection(db,'reports'));
+    const t=today();const tr=rs.docs.filter(d=>d.data().date===t);
+    const w=new Date();w.setDate(w.getDate()-7);
+    const au=new Set();rs.docs.forEach(d=>{const r=d.data();if(r.timestamp?.toDate&&r.timestamp.toDate()>=w)au.add(r.uid);});
+    document.getElementById('aTU').textContent=us.size;
+    document.getElementById('aTR').textContent=tr.length;
+    document.getElementById('aAR').textContent=rs.size;
+    document.getElementById('aAB').textContent=au.size;
+    document.getElementById('aUsers').innerHTML=us.docs.map(d=>{const u=d.data();return `<div class="arow"><div class="av" style="width:34px;height:34px;font-size:12px">${u.name?.slice(0,2).toUpperCase()||'??'}</div><div class="an">${u.name}</div><div class="ae">${u.email}</div><div class="as">🔥${u.streak||0}d</div></div>`;}).join('');
+  }catch(e){console.error(e);}
+}
+
+async function postAnn(){
+  const title=document.getElementById('annTitle').value.trim();
+  const msg=document.getElementById('annMsg').value.trim();
+  if(!title||!msg){toast('Please fill title and message');return;}
+  await addDoc(collection(db,'announcements'),{title,message:msg,postedBy:UD?.name||'Admin',timestamp:serverTimestamp()});
+  toast('📢 Announcement posted! Jay Harivansh!');
+  document.getElementById('annTitle').value='';
+  document.getElementById('annMsg').value='';
+}
+</script>
+</body>
+</html>
