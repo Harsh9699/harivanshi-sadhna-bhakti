@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harivanshi Sadhna Bhakti</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
+
+/* ── VARIABLES ── */
+:root {
+  --cream: #FDF6EC;
+  --saffron: #E8750A;
+  --saffron-light: #F59340;
+  --saffron-pale: #FDE8CC;
+  --pink: #F2A0A0;
+  --pink-light: #FDEAEA;
+  --pink-pale: #FFF0F0;
+  --text-dark: #2C1810;
+  --text-mid: #6B3D20;
+  --text-muted: #A0724A;
+  --border: rgba(200,134,10,0.2);
+  --border-pink: rgba(242,160,160,0.4);
+  --shadow: 0 4px 24px rgba(200,120,20,0.1);
+  --shadow-lg: 0 8px 40px rgba(200,120,20,0.18);
+}
+
+/* ── RESET ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Jost', Georgia, sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  min-height: 100vh;
+  font-weight: 300;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at 10% 0%, rgba(242,160,160,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 100%, rgba(232,117,10,0.08) 0%, transparent 50%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ── PAGES ── */
+.page { display: none; position: relative; z-index: 1; min-height: 100vh; }
+.page.active { display: block; }
+
+/* ── NAV ── */
+nav {
+  background: rgba(253,246,236,0.95);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  position: sticky; top: 0; z-index: 200;
+  backdrop-filter: blur(16px);
+}
+.nav-inner {
+  max-width: 960px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 58px; gap: 8px;
+}
+.nav-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-weight: 600;
+  color: var(--saffron); line-height: 1.2; cursor: pointer;
+}
+.nav-brand small {
+  display: block; font-family: 'Jost', sans-serif;
+  font-size: 8px; color: var(--text-muted);
+  letter-spacing: 3px; font-weight: 400; text-transform: uppercase;
+}
+.nav-links { display: flex; gap: 5px; flex-wrap: wrap; align-items: center; }
+.nb {
+  background: none; border: 1px solid var(--border);
+  color: var(--text-mid); padding: 5px 12px; border-radius: 20px;
+  font-family: 'Jost', sans-serif; font-size: 12px; cursor: pointer; transition: all 0.25s;
+}
+.nb:hover { background: var(--saffron-pale); border-color: var(--saffron-light); color: var(--saffron); }
+.nb.active-nav { background: var(--saffron-pale); border-color: var(--saffron-light); color: var(--saffron); }
+.nb.primary { background: var(--saffron); border-color: var(--saffron); color: white; font-weight: 500; }
+.nb.primary:hover { background: var(--saffron-light); }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  background: var(--saffron); color: white; border: none;
+  padding: 13px 32px; border-radius: 30px;
+  font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(232,117,10,0.3);
+}
+.btn-primary:hover { background: var(--saffron-light); transform: translateY(-2px); }
+.btn-secondary {
+  background: white; color: var(--saffron);
+  border: 1.5px solid var(--saffron);
+  padding: 13px 32px; border-radius: 30px;
+  font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.3s;
+}
+.btn-secondary:hover { background: var(--saffron-pale); transform: translateY(-2px); }
+.btn-block {
+  width: 100%; background: var(--saffron); color: white; border: none;
+  padding: 14px; border-radius: 12px;
+  font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 500;
+  cursor: pointer; transition: all 0.3s; margin-top: 6px;
+  box-shadow: 0 4px 16px rgba(232,117,10,0.25);
+}
+.btn-block:hover { background: var(--saffron-light); transform: translateY(-1px); }
+.btn-block:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* ── FORM ── */
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block; font-size: 11px; font-weight: 500;
+  color: var(--text-mid); margin-bottom: 6px;
+  letter-spacing: 1.5px; text-transform: uppercase;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%; background: var(--cream);
+  border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 11px 14px; color: var(--text-dark);
+  font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 300;
+  outline: none; transition: border-color 0.2s;
+}
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--saffron-light); background: white; }
+.form-group textarea { resize: vertical; min-height: 80px; }
+.form-group select { cursor: pointer; }
+.alert-err {
+  background: #FEF2F2; border: 1px solid #FECACA;
+  border-radius: 10px; padding: 10px 14px;
+  font-size: 13px; color: #DC2626; margin-bottom: 14px; display: none;
+}
+.alert-suc {
+  background: #F0FDF4; border: 1px solid #BBF7D0;
+  border-radius: 10px; padding: 10px 14px;
+  font-size: 13px; color: #16A34A; margin-bottom: 14px; display: none;
+}
+
+/* ── CARDS ── */
+.card {
+  background: white; border: 1px solid var(--border);
+  border-radius: 20px; padding: 22px;
+  box-shadow: 0 2px 12px rgba(200,120,20,0.06);
+}
+.card-title {
+  font-size: 10px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px;
+}
+.check-card {
+  background: white; border: 1px solid var(--border);
+  border-radius: 20px; padding: 22px; margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(200,120,20,0.06);
+}
+
+/* ── BADGES ── */
+.badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 500; }
+.badge-ok { background: #F0FDF4; border: 1px solid #BBF7D0; color: #16A34A; }
+.badge-no { background: #FEF2F2; border: 1px solid #FECACA; color: #DC2626; }
+.badge-info { background: var(--saffron-pale); border: 1px solid var(--border); color: var(--saffron); }
+.pill {
+  background: linear-gradient(135deg, var(--saffron), var(--saffron-light));
+  color: white; padding: 3px 10px; border-radius: 12px;
+  font-size: 11px; font-weight: 500; white-space: nowrap;
+}
+.ms-badge {
+  padding: 4px 14px; border-radius: 20px; font-size: 11px;
+  border: 1px solid var(--border); color: var(--text-muted); background: white;
+}
+.ms-badge.earned {
+  background: linear-gradient(135deg, var(--saffron), var(--saffron-light));
+  border: none; color: white; font-weight: 500;
+}
+
+/* ── QUOTE BOX ── */
+.quote-box {
+  background: linear-gradient(135deg, var(--cream), var(--pink-pale));
+  border-left: 3px solid var(--saffron-light);
+  padding: 10px 14px; border-radius: 0 10px 10px 0;
+  font-size: 13px; color: var(--text-mid);
+  font-style: italic; line-height: 1.6; margin-top: 8px;
+}
+
+/* ── TABS ── */
+.tabs { display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+.tab {
+  padding: 7px 20px; border-radius: 20px;
+  border: 1px solid var(--border); background: white;
+  color: var(--text-muted); font-family: 'Jost', sans-serif;
+  font-size: 13px; cursor: pointer; transition: all 0.2s;
+}
+.tab.active { background: var(--saffron); border-color: var(--saffron); color: white; }
+
+/* ── AVATAR ── */
+.av {
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--saffron-pale), var(--pink-light));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; color: var(--saffron);
+  flex-shrink: 0; border: 1px solid var(--border);
+}
+
+/* ── LOADING / EMPTY ── */
+.loading {
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px; color: var(--text-muted); font-size: 13px;
+  gap: 10px; font-style: italic;
+}
+.spinner {
+  width: 20px; height: 20px;
+  border: 2px solid var(--border); border-top-color: var(--saffron);
+  border-radius: 50%; animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.empty { text-align: center; padding: 50px 20px; color: var(--text-muted); }
+.empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.5; display: block; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 28px; left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--text-dark); color: white;
+  padding: 12px 24px; border-radius: 24px; font-size: 13px;
+  z-index: 9999; transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  max-width: 300px; text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ── ANIMATIONS ── */
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes slideUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+@keyframes popIn { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes confettiFall { 0%{transform:translateY(-20px) rotate(0deg);opacity:1} 100%{transform:translateY(400px) rotate(720deg);opacity:0} }
+
+.slide-up { animation: slideUp 0.3s ease both; }
+
+/* ── MISC ── */
+.divider { text-align: center; padding: 16px; color: var(--saffron-light); font-size: 18px; letter-spacing: 16px; opacity: 0.6; }
+.back-link { display: inline-block; margin-top: 16px; font-size: 13px; color: var(--text-muted); cursor: pointer; }
+.back-link:hover { color: var(--saffron); }
+.text-link { color: var(--saffron); cursor: pointer; font-weight: 500; }
+footer { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 13px; border-top: 1px solid var(--border); margin-top: 40px; line-height: 2.2; }
+
+/* ── HOME ── */
+.hero { text-align: center; padding: 80px 24px 60px; max-width: 700px; margin: 0 auto; }
+.hero-icon {
+  width: 90px; height: 90px;
+  background: linear-gradient(135deg, var(--saffron-pale), var(--pink-pale));
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 28px; font-size: 44px;
+  animation: float 4s ease-in-out infinite;
+  border: 1px solid var(--border-pink);
+  box-shadow: 0 8px 32px rgba(232,117,10,0.12);
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px,6vw,48px); font-weight: 500;
+  color: var(--text-dark); line-height: 1.2; margin-bottom: 12px;
+}
+.hero h1 span { color: var(--saffron); }
+.hero p { font-size: 15px; color: var(--text-muted); margin-bottom: 36px; line-height: 1.7; font-style: italic; }
+.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.features-wrap { max-width: 960px; margin: 0 auto; padding: 60px 24px; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 16px; }
+.feat-card {
+  background: white; border: 1px solid var(--border);
+  border-radius: 20px; padding: 28px 24px; transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.feat-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--saffron), var(--pink));
+  opacity: 0; transition: opacity 0.3s;
+}
+.feat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.feat-card:hover::before { opacity: 1; }
+.feat-icon { width: 48px; height: 48px; background: var(--saffron-pale); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+.feat-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+.feat-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+.section-label { text-align: center; font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 40px; font-weight: 500; }
+
+/* ── AUTH ── */
+.auth-wrap { max-width: 420px; margin: 60px auto; padding: 20px; }
+.auth-card { background: white; border: 1px solid var(--border); border-radius: 28px; padding: 40px 36px; box-shadow: var(--shadow); }
+.auth-icon { width: 64px; height: 64px; background: linear-gradient(135deg,var(--saffron-pale),var(--pink-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 20px; }
+.auth-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--text-dark); text-align: center; margin-bottom: 4px; }
+.auth-card .sub { text-align: center; font-size: 13px; color: var(--text-muted); margin-bottom: 28px; font-style: italic; }
+.auth-footer { text-align: center; margin-top: 18px; font-size: 13px; color: var(--text-muted); }
+
+/* ── DASHBOARD ── */
+.dash-header {
+  background: linear-gradient(135deg, var(--saffron-pale) 0%, var(--pink-pale) 100%);
+  border-bottom: 1px solid var(--border-pink);
+  padding: 32px 24px; text-align: center;
+}
+.dash-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+.dash-header p { font-size: 13px; color: var(--text-muted); font-style: italic; }
+.stats-row { display: flex; justify-content: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+.stat-pill { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 12px 20px; text-align: center; box-shadow: 0 2px 12px rgba(200,120,20,0.08); min-width: 90px; }
+.stat-pill .num { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 600; color: var(--saffron); display: block; line-height: 1; }
+.stat-pill .lbl { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; display: block; }
+.milestone-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 14px; }
+.dash-grid { max-width: 960px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:600px){ .dash-grid { grid-template-columns: 1fr; } }
+.today-bar { background: linear-gradient(135deg,var(--saffron-pale),var(--pink-pale)); border: 1px solid var(--border-pink); border-radius: 12px; padding: 12px 16px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-mid); }
+.pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--saffron); flex-shrink: 0; animation: pulse 2s infinite; }
+
+/* ── SADHNA FORM ── */
+.form-wrap { max-width: 600px; margin: 0 auto; padding: 32px 24px; }
+.page-header { text-align: center; margin-bottom: 28px; }
+.page-header .icon-circle { width: 64px; height: 64px; background: linear-gradient(135deg,var(--saffron-pale),var(--pink-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 14px; }
+.page-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+.page-header p { font-size: 13px; color: var(--text-muted); font-style: italic; }
+.check-row { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px solid rgba(200,134,10,0.1); }
+.check-row:last-child { border-bottom: none; padding-bottom: 0; }
+.check-row input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--saffron); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+.check-row label { font-size: 15px; color: var(--text-dark); cursor: pointer; line-height: 1.4; }
+.check-row label small { display: block; color: var(--text-muted); font-size: 12px; font-style: italic; margin-top: 2px; }
+.mala-counter { display: flex; align-items: center; gap: 14px; justify-content: center; padding: 10px 0; }
+.mala-btn { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--saffron); background: white; color: var(--saffron); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.mala-btn:hover { background: var(--saffron); color: white; }
+.mala-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--saffron); min-width: 40px; text-align: center; }
+.mala-hint { font-size: 11px; color: var(--text-muted); text-align: center; }
+
+/* ── FEED ── */
+.feed-wrap { max-width: 700px; margin: 0 auto; padding: 32px 24px; }
+.report-card { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 14px; box-shadow: 0 2px 12px rgba(200,120,20,0.06); animation: slideUp 0.3s ease both; }
+.report-card:hover { border-color: var(--saffron-light); box-shadow: var(--shadow); }
+.report-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.report-meta { flex: 1; }
+.report-name { font-size: 14px; font-weight: 500; color: var(--text-dark); }
+.report-date { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.badges-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+
+/* ── COMMENTS ── */
+.comments-wrap { margin-top: 14px; border-top: 1px solid rgba(200,134,10,0.1); padding-top: 12px; }
+.comments-toggle { background: none; border: none; color: var(--text-muted); font-family: 'Jost', sans-serif; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 4px 0; }
+.comments-toggle:hover { color: var(--saffron); }
+.comments-list { display: none; margin-top: 10px; }
+.comments-list.open { display: block; }
+.comment-item { display: flex; gap: 10px; margin-bottom: 10px; animation: slideUp 0.2s ease; }
+.comment-av { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg,var(--saffron-pale),var(--pink-light)); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; color: var(--saffron); flex-shrink: 0; border: 1px solid var(--border); }
+.comment-bubble { flex: 1; background: var(--cream); border-radius: 10px; padding: 8px 12px; }
+.comment-who { font-size: 11px; font-weight: 600; color: var(--saffron); margin-bottom: 2px; }
+.comment-text { font-size: 13px; color: var(--text-dark); line-height: 1.5; }
+.comment-time { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+.comment-input-row { display: flex; gap: 8px; margin-top: 8px; }
+.comment-input-row input { flex: 1; background: var(--cream); border: 1.5px solid var(--border); border-radius: 20px; padding: 8px 14px; color: var(--text-dark); font-family: 'Jost', sans-serif; font-size: 13px; outline: none; }
+.comment-input-row input:focus { border-color: var(--saffron-light); background: white; }
+.comment-send-btn { background: var(--saffron); color: white; border: none; border-radius: 20px; padding: 8px 16px; font-size: 12px; cursor: pointer; white-space: nowrap; font-family: 'Jost', sans-serif; }
+
+/* ── LEADERBOARD ── */
+.lb-wrap { max-width: 700px; margin: 0 auto; padding: 32px 24px; }
+.lb-row { display: flex; align-items: center; gap: 14px; background: white; border: 1px solid var(--border); border-radius: 16px; padding: 14px 18px; margin-bottom: 10px; transition: all 0.25s; animation: slideUp 0.3s ease both; cursor: pointer; }
+.lb-row:hover { transform: translateX(4px); box-shadow: var(--shadow); }
+.lb-row.gold { border-color: #F59E0B; background: #FFFBEB; }
+.lb-row.silver { border-color: #9CA3AF; background: #F9FAFB; }
+.lb-row.bronze { border-color: #D97706; background: #FFFBF0; }
+.lb-rank { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; min-width: 32px; text-align: center; color: var(--text-muted); }
+.lb-info { flex: 1; }
+.lb-name { font-size: 14px; font-weight: 500; color: var(--text-dark); }
+.lb-stats { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.lb-streak-num { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--saffron); display: block; line-height: 1; text-align: right; }
+.lb-streak-lbl { font-size: 9px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+
+/* ── PROGRESS CHART ── */
+.chart-wrap { max-width: 700px; margin: 0 auto; padding: 32px 24px; }
+.bar-chart { display: flex; align-items: flex-end; gap: 6px; height: 120px; padding: 0 4px; }
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.bar { width: 100%; border-radius: 6px 6px 0 0; transition: height 0.5s ease; min-height: 4px; }
+.bar.saffron { background: linear-gradient(180deg, var(--saffron-light), var(--saffron)); }
+.bar-lbl { font-size: 9px; color: var(--text-muted); text-align: center; white-space: nowrap; }
+.bar-val { font-size: 9px; color: var(--saffron); font-weight: 600; }
+.streak-dot { width: 22px; height: 22px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 600; }
+.streak-dot.done { background: linear-gradient(135deg,var(--saffron),var(--saffron-light)); color: white; }
+.streak-dot.partial { background: #FEF2F2; border: 1px solid #FECACA; color: #DC2626; }
+.streak-dot.empty { background: var(--cream); border: 1px solid var(--border); color: var(--text-muted); }
+.chart-legend { display: flex; gap: 14px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
+.legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+
+/* ── PROFILES ── */
+.profiles-wrap { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+.profiles-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 14px; }
+.profile-card { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 20px; text-align: center; transition: all 0.3s; cursor: pointer; animation: slideUp 0.3s ease both; }
+.profile-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--saffron-light); }
+.profile-av-lg { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg,var(--saffron-pale),var(--pink-light)); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 600; color: var(--saffron); margin: 0 auto 12px; border: 2px solid var(--border); }
+.profile-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 600; color: var(--text-dark); margin-bottom: 2px; }
+.profile-city { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+.profile-mini-stats { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+.profile-mini-stat { font-size: 10px; color: var(--text-muted); background: var(--cream); padding: 3px 8px; border-radius: 10px; }
+.profile-detail-wrap { max-width: 600px; margin: 0 auto; padding: 32px 24px; }
+.profile-hero-card { background: linear-gradient(135deg,var(--saffron-pale),var(--pink-pale)); border-radius: 24px; padding: 28px; text-align: center; margin-bottom: 20px; border: 1px solid var(--border-pink); }
+.profile-av-xl { width: 80px; height: 80px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 700; color: var(--saffron); margin: 0 auto 14px; border: 2px solid var(--saffron-light); box-shadow: 0 4px 16px rgba(232,117,10,0.2); }
+.profile-hero-card h2 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+.profile-hero-card p { font-size: 13px; color: var(--text-muted); font-style: italic; }
+
+/* ── ANNOUNCEMENTS ── */
+.ann-card { background: white; border: 1px solid var(--border-pink); border-radius: 16px; padding: 18px 20px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(200,120,20,0.06); animation: slideUp 0.3s ease both; }
+.ann-card:hover { border-color: var(--saffron-light); box-shadow: var(--shadow); }
+.ann-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; }
+.ann-msg { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 10px; }
+.ann-meta { font-size: 11px; color: var(--text-muted); font-style: italic; }
+
+/* ── ADMIN ── */
+.admin-wrap { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+.admin-lock-wrap { max-width: 420px; margin: 80px auto; padding: 20px; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 14px; margin-bottom: 24px; }
+.stat-box { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 18px; text-align: center; box-shadow: 0 2px 10px rgba(200,120,20,0.06); }
+.stat-box .big { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: var(--saffron); display: block; }
+.stat-box .sm { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; }
+.data-table { background: white; border: 1px solid var(--border); border-radius: 20px; overflow: hidden; margin-bottom: 20px; }
+.data-table-head { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); padding: 16px 20px; border-bottom: 1px solid var(--border); background: var(--cream); }
+.data-row { display: flex; align-items: center; padding: 12px 20px; border-bottom: 1px solid rgba(200,134,10,0.07); gap: 12px; }
+.data-row:last-child { border-bottom: none; }
+
+/* ── MILESTONE POPUP ── */
+.milestone-overlay { position: fixed; inset: 0; background: rgba(44,24,16,0.6); z-index: 1000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+.milestone-overlay.show { display: flex; }
+.milestone-box { background: white; border-radius: 32px; padding: 40px 32px; text-align: center; max-width: 340px; width: 90%; box-shadow: 0 20px 60px rgba(200,120,20,0.3); animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1); border: 2px solid var(--saffron-light); position: relative; overflow: hidden; }
+.milestone-box::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(253,232,204,0.4),rgba(255,240,240,0.4)); pointer-events: none; }
+.milestone-emoji { font-size: 64px; margin-bottom: 16px; display: block; animation: bounce 1s ease infinite; }
+.milestone-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+.milestone-msg { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; font-style: italic; }
+.confetti-wrap { position: absolute; top: 0; left: 0; right: 0; height: 100%; pointer-events: none; overflow: hidden; }
+.confetti-piece { position: absolute; width: 8px; height: 8px; border-radius: 2px; animation: confettiFall 3s ease infinite; }
+</style>
+</head>
+<body>
+
+<!-- MILESTONE POPUP -->
+<div class="milestone-overlay" id="milestoneOverlay">
+  <div class="milestone-box">
+    <div class="confetti-wrap" id="confettiWrap"></div>
+    <span class="milestone-emoji" id="msEmoji">🏆</span>
+    <div class="milestone-title" id="msTitle">Amazing!</div>
+    <div class="milestone-msg" id="msMsg">You've reached a milestone!</div>
+    <button class="btn-block" id="msClose" style="margin-top:0">🪷 Jay Harivansh!</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav" style="display:none">
+  <div class="nav-inner">
+    <div class="nav-brand" id="navBrand">🪷 Harivanshi Sadhna<small>BHAKTI COMMUNITY</small></div>
+    <div class="nav-links">
+      <button class="nb" id="navAnnounce">📢 Updates</button>
+      <button class="nb" id="navCommunity">🙏 Sangha</button>
+      <button class="nb" id="navProfiles">👥 Bhakts</button>
+      <button class="nb" id="navLeaderboard">🏆 Board</button>
+      <button class="nb" id="navDashboard">📿 Sadhna</button>
+      <button class="nb" id="navAdmin" style="display:none">⚙️ Admin</button>
+      <button class="nb primary" id="navLogout">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<!-- ══════════ HOME ══════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-icon">🪷</div>
+    <h1>Harivanshi<br><span>Sadhna Bhakti</span></h1>
+    <p>हरिवंशी साधना भक्ति — A sacred space for devoted bhakts<br>to track, share and grow in daily spiritual practice</p>
+    <div class="hero-btns">
+      <button class="btn-primary" id="homeJoin">🙏 Join the Sangha</button>
+      <button class="btn-secondary" id="homeLogin">🔑 Login</button>
+    </div>
+  </div>
+  <div class="features-wrap">
+    <p class="section-label">What we offer</p>
+    <div class="features-grid">
+      <div class="feat-card"><div class="feat-icon">📿</div><h3>11 Mala Naam Jap</h3><p>Track your daily 11 Mala Naam Jap and build a consistent spiritual streak</p></div>
+      <div class="feat-card"><div class="feat-icon">🎧</div><h3>30 Min Satsang</h3><p>Log daily satsang listening and deepen your connection with the Divine</p></div>
+      <div class="feat-card"><div class="feat-icon">📊</div><h3>Progress Charts</h3><p>Visualize your weekly and monthly sadhna progress beautifully</p></div>
+      <div class="feat-card"><div class="feat-icon">👥</div><h3>Bhakt Profiles</h3><p>Connect with fellow bhakts and see their sadhna journey</p></div>
+      <div class="feat-card"><div class="feat-icon">💬</div><h3>Comments</h3><p>Leave encouraging bhakti comments on your sangha's daily reports</p></div>
+      <div class="feat-card"><div class="feat-icon">🎁</div><h3>Milestone Celebrations</h3><p>Get celebrated with confetti when you hit 7, 21, 30 and 108 day streaks!</p></div>
+    </div>
+  </div>
+  <div class="divider">· · ·</div>
+  <footer>🪷<br>राधावल्लभ श्री हरिवंश 🌺<br>Harivanshi Sadhna Bhakti © 2025 — All Bhakts Welcome</footer>
+</div>
+
+<!-- ══════════ LOGIN ══════════ -->
+<div class="page" id="page-login">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-icon">🪷</div>
+      <h2>Jai Harivansh</h2>
+      <p class="sub">Login to continue your sadhna journey</p>
+      <div class="alert-err" id="loginErr"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="loginPass" placeholder="Your password"></div>
+      <button class="btn-block" id="loginBtn">🙏 Login</button>
+      <div class="auth-footer">New bhakt? <span class="text-link" id="loginToSignup">Create account</span></div>
+      <div class="auth-footer" style="margin-top:8px"><span class="back-link" id="loginToHome">← Back to Home</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SIGNUP ══════════ -->
+<div class="page" id="page-signup">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-icon">🙏</div>
+      <h2>Join the Sangha</h2>
+      <p class="sub">Begin your sacred sadhna journey today</p>
+      <div class="alert-err" id="signupErr"></div>
+      <div class="alert-suc" id="signupSuc"></div>
+      <div class="form-group"><label>Your Bhakt Name</label><input type="text" id="signupName" placeholder="e.g. Ram Das, Meera Devi"></div>
+      <div class="form-group"><label>Email</label><input type="email" id="signupEmail" placeholder="your@email.com"></div>
+      <div class="form-group"><label>Password (min 6 chars)</label><input type="password" id="signupPass" placeholder="Create a password"></div>
+      <div class="form-group"><label>City</label><input type="text" id="signupCity" placeholder="e.g. Mumbai, Vrindavan, Delhi"></div>
+      <div class="form-group"><label>About Me (Optional)</label><input type="text" id="signupBio" placeholder="e.g. Devoted bhakt since 2020..."></div>
+      <button class="btn-block" id="signupBtn">🙏 Join Sangha</button>
+      <div class="auth-footer">Already a bhakt? <span class="text-link" id="signupToLogin">Login here</span></div>
+      <div class="auth-footer" style="margin-top:8px"><span class="back-link" id="signupToHome">← Back to Home</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DASHBOARD ══════════ -->
+<div class="page" id="page-dashboard">
+  <div class="dash-header">
+    <h2 id="dashGreet">🪷 Jai Harivansh</h2>
+    <p id="dashSub">Your personal sadhna space</p>
+    <div class="stats-row">
+      <div class="stat-pill"><span class="num" id="dStreak">0</span><span class="lbl">🔥 Streak</span></div>
+      <div class="stat-pill"><span class="num" id="dReports">0</span><span class="lbl">📋 Reports</span></div>
+      <div class="stat-pill"><span class="num" id="dMalas">0</span><span class="lbl">📿 Malas</span></div>
+    </div>
+    <div class="milestone-row" id="dashMilestones"></div>
+  </div>
+  <div class="dash-grid">
+    <div class="card" style="grid-column:1/-1">
+      <div class="card-title">Today's Sadhna</div>
+      <div class="today-bar"><div class="pulse-dot"></div><span id="todayStatus">Checking...</span></div>
+      <div id="todayDetail"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Recent Reports</div>
+      <div id="recentReports"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
+    <div class="card">
+      <div class="card-title">My Badges</div>
+      <div id="myBadges" style="padding:4px"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
+    <div class="card" style="grid-column:1/-1">
+      <div class="card-title">Last 7 Days</div>
+      <div id="miniChart"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SADHNA FORM ══════════ -->
+<div class="page" id="page-sadhna">
+  <div class="form-wrap">
+    <div class="page-header">
+      <div class="icon-circle">📿</div>
+      <h2>Daily Sadhna Report</h2>
+      <p>Record your sacred practice for today</p>
+    </div>
+    <div class="alert-err" id="sadhnaErr"></div>
+    <div class="alert-suc" id="sadhnaSuc"></div>
+    <div class="check-card">
+      <div class="card-title">Daily Challenge</div>
+      <div class="check-row">
+        <input type="checkbox" id="chkMala" onchange="toggleMala()">
+        <label for="chkMala">📿 11 Mala Naam Jap Completed<small>Complete 11 rounds of Naam Jap on your mala</small></label>
+      </div>
+      <div id="malaSection" style="display:none;padding:8px 0 4px">
+        <div style="font-size:11px;color:var(--text-muted);text-align:center;margin-bottom:6px">How many malas completed?</div>
+        <div class="mala-counter">
+          <button class="mala-btn" onclick="changeMala(-1)">−</button>
+          <span class="mala-num" id="malaNum">11</span>
+          <button class="mala-btn" onclick="changeMala(1)">+</button>
+        </div>
+        <div class="mala-hint" id="malaHint">11 Mala ✓ Target met</div>
+      </div>
+      <div class="check-row">
+        <input type="checkbox" id="chkSatsang">
+        <label for="chkSatsang">🎧 30 Minutes Satsang Listened<small>Listen to spiritual discourse or pravachan</small></label>
+      </div>
+      <div class="form-group" style="margin-top:14px;margin-bottom:0">
+        <label>Which Satsang did you listen to?</label>
+        <input type="text" id="satsangName" placeholder="e.g. Bhagavat Katha, Ramayana Pravachan...">
+      </div>
+    </div>
+    <div class="check-card">
+      <div class="card-title">Reflections</div>
+      <div class="form-group"><label>🌟 Extra Sadhna (Optional)</label><textarea id="extraSadhna" placeholder="Any additional practices today?&#10;e.g. Temple visit, Gita reading, Seva, Bhajan..."></textarea></div>
+      <div class="form-group"><label>💭 Bhakti Reflection (Optional)</label><textarea id="reflection" placeholder="Share a thought to inspire other bhakts..."></textarea></div>
+      <div class="form-group" style="margin-bottom:0">
+        <label>🌸 Your Spiritual Mood</label>
+        <select id="mood">
+          <option value="">Select your mood today...</option>
+          <option value="🌟 Blissful">🌟 Blissful — Ananda</option>
+          <option value="🙏 Devoted">🙏 Devoted — Bhakti Bhav</option>
+          <option value="😌 Peaceful">😌 Peaceful — Shanti</option>
+          <option value="💪 Strong">💪 Strong — Shakti</option>
+          <option value="🤔 Struggling">🤔 Struggling — but trying</option>
+          <option value="🔥 Intense">🔥 Intense — Tapasya mood</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-block" id="submitBtn">🙏 Submit Today's Report</button>
+    <div style="text-align:center"><span class="back-link" id="sadhnaBack">← Back to Dashboard</span></div>
+  </div>
+</div>
+
+<!-- ══════════ COMMUNITY ══════════ -->
+<div class="page" id="page-community">
+  <div class="feed-wrap">
+    <div class="page-header">
+      <div class="icon-circle">🕊️</div>
+      <h2>Bhakti Sangha</h2>
+      <p>Be inspired by fellow bhakts' daily sadhna</p>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="loadFeed('all',this)">All Reports</button>
+      <button class="tab" onclick="loadFeed('today',this)">Today</button>
+      <button class="tab" onclick="loadFeed('week',this)">This Week</button>
+    </div>
+    <div id="feedEl"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+  </div>
+</div>
+
+<!-- ══════════ PROGRESS CHART ══════════ -->
+<div class="page" id="page-chart">
+  <div class="chart-wrap">
+    <div class="page-header">
+      <div class="icon-circle">📊</div>
+      <h2>My Progress</h2>
+      <p>Your sadhna journey visualized</p>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="loadChart(7,this)">7 Days</button>
+      <button class="tab" onclick="loadChart(30,this)">30 Days</button>
+    </div>
+    <div id="chartEl"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    <div style="text-align:center"><span class="back-link" id="chartBack">← Back to Dashboard</span></div>
+  </div>
+</div>
+
+<!-- ══════════ PROFILES ══════════ -->
+<div class="page" id="page-profiles">
+  <div class="profiles-wrap">
+    <div class="page-header">
+      <div class="icon-circle">👥</div>
+      <h2>Bhakt Profiles</h2>
+      <p>Meet the devoted souls of our sangha</p>
+    </div>
+    <div id="profilesGrid"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+  </div>
+</div>
+
+<!-- ══════════ PROFILE DETAIL ══════════ -->
+<div class="page" id="page-profile">
+  <div class="profile-detail-wrap">
+    <div id="profileDetailEl"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    <div style="text-align:center"><span class="back-link" id="profileBack">← Back to Bhakts</span></div>
+  </div>
+</div>
+
+<!-- ══════════ LEADERBOARD ══════════ -->
+<div class="page" id="page-leaderboard">
+  <div class="lb-wrap">
+    <div class="page-header">
+      <div class="icon-circle">🏆</div>
+      <h2>Sadhna Leaderboard</h2>
+      <p>Bhakts with the highest sadhna streaks</p>
+    </div>
+    <div id="lbEl"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+  </div>
+</div>
+
+<!-- ══════════ ANNOUNCEMENTS ══════════ -->
+<div class="page" id="page-announce">
+  <div class="feed-wrap">
+    <div class="page-header">
+      <div class="icon-circle">📢</div>
+      <h2>Sangha Updates</h2>
+      <p>Announcements from Harivanshi Sadhna community</p>
+    </div>
+    <div id="annEl"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+  </div>
+</div>
+
+<!-- ══════════ ADMIN LOCK ══════════ -->
+<div class="page" id="page-adminlock">
+  <div class="admin-lock-wrap">
+    <div class="auth-card">
+      <div class="auth-icon">⚙️</div>
+      <h2>Admin Access</h2>
+      <p class="sub">Enter admin password to continue</p>
+      <div class="alert-err" id="lockErr"></div>
+      <div class="form-group"><label>Admin Password</label><input type="password" id="adminPassInput" placeholder="Enter password"></div>
+      <button class="btn-block" id="adminUnlockBtn">🔓 Unlock Admin</button>
+      <div class="auth-footer" style="margin-top:14px"><span class="back-link" id="lockBack">← Back to Dashboard</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ ADMIN ══════════ -->
+<div class="page" id="page-admin">
+  <div class="admin-wrap">
+    <div class="page-header">
+      <div class="icon-circle">⚙️</div>
+      <h2>Admin Dashboard</h2>
+      <p>Manage the Harivanshi Sadhna community</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-box"><span class="big" id="aTU">-</span><span class="sm">Total Bhakts</span></div>
+      <div class="stat-box"><span class="big" id="aTR">-</span><span class="sm">Reports Today</span></div>
+      <div class="stat-box"><span class="big" id="aAR">-</span><span class="sm">Total Reports</span></div>
+      <div class="stat-box"><span class="big" id="aAB">-</span><span class="sm">Active This Week</span></div>
+    </div>
+    <div class="data-table">
+      <div class="data-table-head">All Bhakts</div>
+      <div id="adminUsers"><div class="loading"><div class="spinner"></div>Loading...</div></div>
+    </div>
+    <div class="check-card">
+      <div class="card-title">Post Announcement</div>
+      <div class="form-group"><label>Title</label><input type="text" id="annTitle" placeholder="e.g. Special Satsang this Sunday..."></div>
+      <div class="form-group"><label>Message</label><textarea id="annMsg" placeholder="Write your announcement for all bhakts..."></textarea></div>
+      <button class="btn-block" id="postAnnBtn">📢 Post Announcement</button>
+    </div>
+    <div style="text-align:center"><span class="back-link" id="adminBack">← Back to Dashboard</span></div>
+  </div>
+</div>
+
+<!-- ══════════ FIREBASE + APP LOGIC ══════════ -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  signOut, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getFirestore, doc, setDoc, getDoc, getDocs, addDoc,
+  collection, query, orderBy, limit, where,
+  updateDoc, increment, serverTimestamp, Timestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+// ── CONFIG ──
+const FB_CFG = {
+  apiKey: "AIzaSyAuEWdWNd8ygqg6F4dP70E_iWlsMmoZ1GI",
+  authDomain: "harivanshi-sadhna-bhakti.firebaseapp.com",
+  projectId: "harivanshi-sadhna-bhakti",
+  storageBucket: "harivanshi-sadhna-bhakti.firebasestorage.app",
+  messagingSenderId: "129433987275",
+  appId: "1:129433987275:web:6b7cb40aaa01243f5b534e"
+};
+const ADMIN_EMAIL = "hmkgamer190@gmail.com";
+const ADMIN_PASS  = "Harivansh@108";
+const MILESTONES  = [
+  { streak:1,   emoji:'🌱', title:'First Step!',         msg:'You started your sadhna journey. Jay Harivansh! 🪷' },
+  { streak:7,   emoji:'🌟', title:'7-Day Warrior!',      msg:'Seven days of dedicated sadhna! You earned the 🌟 7-Day Warrior badge!' },
+  { streak:21,  emoji:'🔥', title:'21-Day Sadhak!',      msg:'21 days of consistent sadhna! Habits are forming. True Sadhak!' },
+  { streak:30,  emoji:'🏆', title:'30-Day Champion!',    msg:'A full month of sadhna! You are a true champion of the Sangha!' },
+  { streak:108, emoji:'🪷', title:'108-Day Mahabhakt!',  msg:'108 days! Radhavallabh Shri Harivansh! 🌺' },
+];
+
+const app  = initializeApp(FB_CFG);
+const auth = getAuth(app);
+const db   = getFirestore(app);
+
+let curUser = null, curData = null, malaCount = 11, adminUnlocked = false;
+
+// ── HELPERS ──
+const $ = id => document.getElementById(id);
+const today = () => new Date().toISOString().split('T')[0];
+const initials = name => name ? name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2) : '🙏';
+const getBadges = (streak, totalReports) => {
+  const b = [];
+  if (streak >= 7)   b.push('🌟 7-Day Warrior');
+  if (streak >= 21)  b.push('🔥 21-Day Sadhak');
+  if (streak >= 30)  b.push('🏆 30-Day Champion');
+  if (streak >= 108) b.push('🪷 108-Day Mahabhakt');
+  if (totalReports >= 10)  b.push('📿 10 Reports');
+  if (totalReports >= 50)  b.push('📿 50 Reports');
+  if (totalReports >= 100) b.push('💫 100 Reports');
+  return b;
+};
+
+function showToast(msg) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function showMilestone(streak) {
+  const m = MILESTONES.find(x => x.streak === streak);
+  if (!m) return;
+  $('msEmoji').textContent = m.emoji;
+  $('msTitle').textContent = m.title;
+  $('msMsg').textContent = m.msg;
+  const wrap = $('confettiWrap');
+  wrap.innerHTML = '';
+  const colors = ['#E8750A','#F2A0A0','#FFB300','#F59340','#FDE8CC'];
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.cssText = `left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*2}s;animation-duration:${2+Math.random()*2}s;`;
+    wrap.appendChild(p);
+  }
+  $('milestoneOverlay').classList.add('show');
+}
+
+function goPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  $('page-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+  const loaders = { community:'loadFeed', leaderboard:'loadLB', admin:'loadAdmin', sadhna:'checkDone', announce:'loadAnn', profiles:'loadProfiles', chart:'loadChart7' };
+  if (loaders[name]) window[loaders[name]]();
+}
+window.goPage = goPage;
+
+// ── WIRING ──
+$('msClose').onclick = () => $('milestoneOverlay').classList.remove('show');
+$('milestoneOverlay').onclick = e => { if (e.target === $('milestoneOverlay')) $('milestoneOverlay').classList.remove('show'); };
+$('navBrand').onclick = () => goPage('dashboard');
+$('navAnnounce').onclick = () => goPage('announce');
+$('navCommunity').onclick = () => goPage('community');
+$('navProfiles').onclick = () => goPage('profiles');
+$('navLeaderboard').onclick = () => goPage('leaderboard');
+$('navDashboard').onclick = () => goPage('dashboard');
+$('navAdmin').onclick = () => adminUnlocked ? goPage('admin') : goPage('adminlock');
+$('navLogout').onclick = () => { signOut(auth); adminUnlocked = false; showToast('Jai Harivansh! 🪷'); };
+$('homeJoin').onclick = () => goPage('signup');
+$('homeLogin').onclick = () => goPage('login');
+$('loginToSignup').onclick = () => goPage('signup');
+$('loginToHome').onclick = () => goPage('home');
+$('signupToLogin').onclick = () => goPage('login');
+$('signupToHome').onclick = () => goPage('home');
+$('sadhnaBack').onclick = () => goPage('dashboard');
+$('chartBack').onclick = () => goPage('dashboard');
+$('profileBack').onclick = () => goPage('profiles');
+$('adminBack').onclick = () => goPage('dashboard');
+$('lockBack').onclick = () => goPage('dashboard');
+$('loginBtn').onclick = doLogin;
+$('signupBtn').onclick = doSignup;
+$('submitBtn').onclick = submitReport;
+$('postAnnBtn').onclick = postAnn;
+$('adminUnlockBtn').onclick = checkAdminPass;
+$('adminPassInput').addEventListener('keydown', e => { if (e.key === 'Enter') checkAdminPass(); });
+
+// Global window functions for inline handlers
+window.toggleMala = () => { $('malaSection').style.display = $('chkMala').checked ? 'block' : 'none'; };
+window.changeMala = d => {
+  malaCount = Math.max(0, Math.min(108, malaCount + d));
+  $('malaNum').textContent = malaCount;
+  $('malaHint').textContent = malaCount >= 11 ? malaCount + ' Mala ✓ Target met' : malaCount + ' Mala (Need 11)';
+};
+window.loadFeed = loadFeed;
+window.loadChart = loadChart;
+window.loadChart7 = () => loadChart(7);
+window.viewProfile = viewProfile;
+window.toggleComments = toggleComments;
+window.postComment = postComment;
+window.viewProfileByName = viewProfileByName;
+
+// ── AUTH ──
+function checkAdminPass() {
+  const val = $('adminPassInput').value;
+  if (val === ADMIN_PASS) {
+    adminUnlocked = true;
+    $('adminPassInput').value = '';
+    $('lockErr').style.display = 'none';
+    goPage('admin');
+    showToast('🪷 Welcome Admin!');
+  } else {
+    $('lockErr').textContent = 'Wrong password. Please try again.';
+    $('lockErr').style.display = 'block';
+  }
+}
+
+onAuthStateChanged(auth, async user => {
+  if (user) {
+    curUser = user;
+    try {
+      const snap = await getDoc(doc(db, 'users', user.uid));
+      if (snap.exists()) curData = snap.data();
+    } catch(e) {}
+    $('mainNav').style.display = 'block';
+    $('navDashboard').textContent = '📿 ' + (curData?.name?.split(' ')[0] || 'Sadhna');
+    if (user.email === ADMIN_EMAIL) $('navAdmin').style.display = 'inline-block';
+    goPage('dashboard');
+    loadDashboard();
+  } else {
+    curUser = null; curData = null; adminUnlocked = false;
+    $('mainNav').style.display = 'none';
+    goPage('home');
+  }
+});
+
+async function doLogin() {
+  const email = $('loginEmail').value.trim();
+  const pass  = $('loginPass').value;
+  const btn   = $('loginBtn');
+  $('loginErr').style.display = 'none';
+  if (!email || !pass) { $('loginErr').textContent = 'Please enter email and password'; $('loginErr').style.display = 'block'; return; }
+  btn.disabled = true; btn.textContent = 'Logging in...';
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+    showToast('🪷 Jay Harivansh! Welcome back!');
+  } catch(e) {
+    $('loginErr').textContent = 'Wrong email or password. Please try again.';
+    $('loginErr').style.display = 'block';
+    btn.disabled = false; btn.textContent = '🙏 Login';
+  }
+}
+
+async function doSignup() {
+  const name = $('signupName').value.trim();
+  const email = $('signupEmail').value.trim();
+  const pass  = $('signupPass').value;
+  const city  = $('signupCity').value.trim();
+  const bio   = $('signupBio').value.trim();
+  const btn   = $('signupBtn');
+  $('signupErr').style.display = 'none';
+  $('signupSuc').style.display = 'none';
+  if (!name || !email || !pass) { $('signupErr').textContent = 'Please fill Name, Email and Password'; $('signupErr').style.display = 'block'; return; }
+  if (pass.length < 6) { $('signupErr').textContent = 'Password must be at least 6 characters'; $('signupErr').style.display = 'block'; return; }
+  btn.disabled = true; btn.textContent = 'Joining...';
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    await setDoc(doc(db, 'users', cred.user.uid), {
+      name, email, city: city || '', bio: bio || '',
+      joinedAt: serverTimestamp(), streak: 0, totalReports: 0, totalMalas: 0, lastReportDate: ''
+    });
+    $('signupSuc').textContent = '🪷 Jay Harivansh! Welcome ' + name + '!';
+    $('signupSuc').style.display = 'block';
+  } catch(e) {
+    $('signupErr').textContent = e.code === 'auth/email-already-in-use' ? 'Email already registered. Please login.' : e.code === 'auth/invalid-email' ? 'Please enter a valid email.' : 'Error: ' + e.message;
+    $('signupErr').style.display = 'block';
+    btn.disabled = false; btn.textContent = '🙏 Join Sangha';
+  }
+}
+
+// ── SADHNA FORM ──
+async function checkDone() {
+  if (!curUser) return;
+  $('sadhnaErr').style.display = 'none';
+  $('submitBtn').disabled = false;
+  $('submitBtn').textContent = "🙏 Submit Today's Report";
+  const q = query(collection(db,'reports'), where('uid','==',curUser.uid), where('date','==',today()));
+  const s = await getDocs(q);
+  if (!s.empty) {
+    $('sadhnaErr').textContent = '🪷 Already submitted today! Jay Harivansh!';
+    $('sadhnaErr').style.display = 'block';
+    $('submitBtn').disabled = true;
+    $('submitBtn').textContent = '✅ Already Submitted Today';
+  }
+}
+
+async function submitReport() {
+  if (!curUser || !curData) return;
+  const malaOk    = $('chkMala').checked;
+  const satsangOk = $('chkSatsang').checked;
+  const satsangNm = $('satsangName').value.trim();
+  const extra     = $('extraSadhna').value.trim();
+  const refl      = $('reflection').value.trim();
+  const mood      = $('mood').value;
+  const btn       = $('submitBtn');
+  $('sadhnaErr').style.display = 'none';
+  $('sadhnaSuc').style.display = 'none';
+  const t = today();
+  const existing = query(collection(db,'reports'), where('uid','==',curUser.uid), where('date','==',t));
+  const ex = await getDocs(existing);
+  if (!ex.empty) { $('sadhnaErr').textContent = 'Already submitted today!'; $('sadhnaErr').style.display = 'block'; return; }
+  btn.disabled = true; btn.textContent = 'Submitting...';
+  try {
+    const yest = new Date(); yest.setDate(yest.getDate()-1);
+    const yStr = yest.toISOString().split('T')[0];
+    const newStreak = curData.lastReportDate === yStr ? (curData.streak || 0) + 1 : 1;
+    const malas = malaOk ? malaCount : 0;
+    await addDoc(collection(db,'reports'), {
+      uid: curUser.uid, bhaktName: curData.name, city: curData.city || '',
+      date: t, timestamp: serverTimestamp(),
+      malaCompleted: malaOk, malaCount: malas,
+      satsangCompleted: satsangOk, satsangName: satsangNm,
+      extraSadhna: extra, reflection: refl, mood,
+      streak: newStreak, fullChallenge: malaOk && satsangOk, commentCount: 0
+    });
+    await updateDoc(doc(db,'users',curUser.uid), {
+      streak: newStreak, lastReportDate: t,
+      totalReports: increment(1), totalMalas: increment(malas)
+    });
+    curData.streak = newStreak; curData.lastReportDate = t;
+    curData.totalReports = (curData.totalReports || 0) + 1;
+    curData.totalMalas   = (curData.totalMalas || 0) + malas;
+    $('sadhnaSuc').textContent = '🪷 Jay Harivansh! Streak: ' + newStreak + ' days! 🔥';
+    $('sadhnaSuc').style.display = 'block';
+    btn.textContent = '✅ Report Submitted!';
+    if ([1,7,21,30,108].includes(newStreak)) { setTimeout(() => showMilestone(newStreak), 1500); }
+    else { showToast('🔥 ' + newStreak + ' day streak! Jay Harivansh!'); }
+    setTimeout(() => { goPage('dashboard'); loadDashboard(); }, 2000);
+  } catch(e) {
+    $('sadhnaErr').textContent = 'Error: ' + e.message;
+    $('sadhnaErr').style.display = 'block';
+    btn.disabled = false; btn.textContent = "🙏 Submit Today's Report";
+  }
+}
+
+// ── DASHBOARD ──
+async function loadDashboard() {
+  if (!curUser || !curData) return;
+  const s  = curData.streak || 0;
+  const tr = curData.totalReports || 0;
+  $('dashGreet').textContent = '🪷 Jay Harivansh, ' + curData.name + '!';
+  $('dashSub').textContent = (curData.city || 'Bhakt') + ' — Keep shining in your sadhna';
+  $('dStreak').textContent  = s;
+  $('dReports').textContent = tr;
+  $('dMalas').textContent   = curData.totalMalas || 0;
+  $('dashMilestones').innerHTML = [{d:7,l:'🌟 7 Days'},{d:21,l:'🔥 21 Days'},{d:30,l:'🏆 30 Days'},{d:108,l:'🪷 108 Days'}]
+    .map(m => `<span class="ms-badge ${s>=m.d?'earned':''}">${m.l}</span>`).join('');
+
+  // Today's report
+  try {
+    const tq = query(collection(db,'reports'), where('uid','==',curUser.uid), where('date','==',today()));
+    const ts = await getDocs(tq);
+    if (!ts.empty) {
+      const r = ts.docs[0].data();
+      $('todayStatus').textContent = '✓ Submitted today! ' + (r.fullChallenge ? 'Full challenge completed 🎉' : 'Partial completion');
+      $('todayDetail').innerHTML =
+        `<div class="badges-row">
+          <span class="badge ${r.malaCompleted?'badge-ok':'badge-no'}">📿 ${r.malaCompleted ? r.malaCount+' Mala ✓' : 'Mala not done'}</span>
+          <span class="badge ${r.satsangCompleted?'badge-ok':'badge-no'}">🎧 ${r.satsangCompleted ? 'Satsang ✓' : 'Satsang pending'}</span>
+          ${r.mood ? `<span class="badge badge-info">${r.mood}</span>` : ''}
+        </div>
+        ${r.extraSadhna ? `<div class="quote-box">🌟 ${r.extraSadhna}</div>` : ''}
+        ${r.reflection  ? `<div class="quote-box" style="border-left-color:var(--pink);margin-top:6px">💭 ${r.reflection}</div>` : ''}`;
+    } else {
+      $('todayStatus').textContent = 'You have not submitted today yet';
+      $('todayDetail').innerHTML = `<button class="btn-block" id="goSadhnaBtn" style="margin-top:6px">📿 Submit Today's Sadhna Report</button>`;
+      setTimeout(() => { const b=$('goSadhnaBtn'); if(b) b.onclick=()=>goPage('sadhna'); }, 50);
+    }
+  } catch(e) { $('todayStatus').textContent = 'Could not load today\'s data'; }
+
+  // Recent reports
+  try {
+    const rq = query(collection(db,'reports'), where('uid','==',curUser.uid), orderBy('timestamp','desc'), limit(5));
+    const rs = await getDocs(rq);
+    $('recentReports').innerHTML = rs.empty
+      ? `<div class="empty"><span class="empty-icon">📿</span><p style="font-size:13px">No reports yet!</p></div>`
+      : rs.docs.map(d => {
+          const r = d.data();
+          return `<div style="padding:9px 0;border-bottom:1px solid rgba(200,134,10,0.08);font-size:12px">
+            <div style="color:var(--saffron);margin-bottom:4px;font-weight:500">${r.date}</div>
+            <div class="badges-row">
+              <span class="badge ${r.malaCompleted?'badge-ok':'badge-no'}" style="font-size:10px">📿 ${r.malaCompleted?r.malaCount+'M':'✗'}</span>
+              <span class="badge ${r.satsangCompleted?'badge-ok':'badge-no'}" style="font-size:10px">🎧 ${r.satsangCompleted?'✓':'✗'}</span>
+              <span class="pill" style="font-size:9px">🔥 ${r.streak}d</span>
+            </div>
+          </div>`;
+        }).join('');
+  } catch(e) {
+    try {
+      const rq2 = query(collection(db,'reports'), where('uid','==',curUser.uid), limit(5));
+      const rs2 = await getDocs(rq2);
+      $('recentReports').innerHTML = rs2.empty ? `<p style="font-size:13px;color:var(--text-muted);font-style:italic;padding:8px">No reports yet!</p>`
+        : rs2.docs.map(d=>{const r=d.data();return `<div style="padding:9px 0;border-bottom:1px solid rgba(200,134,10,0.08);font-size:12px"><div style="color:var(--saffron);margin-bottom:4px">${r.date}</div><span class="pill" style="font-size:9px">🔥 ${r.streak}d</span></div>`;}).join('');
+    } catch(e2) { $('recentReports').innerHTML = `<p style="font-size:12px;color:var(--text-muted);padding:8px">Loading...</p>`; }
+  }
+
+  // Badges
+  const badges = getBadges(s, tr);
+  $('myBadges').innerHTML = badges.length
+    ? badges.map(b => `<span class="ms-badge earned" style="margin:3px;display:inline-block">${b}</span>`).join('')
+    : `<p style="font-size:13px;color:var(--text-muted);font-style:italic;padding:6px">Submit sadhna daily to earn badges 🙏</p>`;
+
+  // Mini chart
+  loadMiniChart();
+}
+
+async function loadMiniChart() {
+  try {
+    const q = query(collection(db,'reports'), where('uid','==',curUser.uid), orderBy('timestamp','desc'), limit(7));
+    const s = await getDocs(q);
+    const reports = s.docs.map(d => d.data()).reverse();
+    if (reports.length === 0) { $('miniChart').innerHTML = `<p style="font-size:13px;color:var(--text-muted);text-align:center;padding:14px;font-style:italic">Submit daily sadhna to see your progress chart 🙏</p>`; return; }
+    const maxM = Math.max(...reports.map(r => r.malaCount||0), 11);
+    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    $('miniChart').innerHTML = `
+      <div class="bar-chart">
+        ${reports.map(r => {
+          const h = Math.max(4, Math.round(((r.malaCount||0)/maxM)*100));
+          const d = days[new Date(r.date).getDay()];
+          return `<div class="bar-col"><div class="bar-val">${r.malaCount||0}</div><div class="bar saffron" style="height:${h}px"></div><div class="bar-lbl">${d}</div></div>`;
+        }).join('')}
+      </div>
+      <div class="chart-legend"><div class="legend-item"><div class="legend-dot" style="background:var(--saffron)"></div>Daily Malas</div></div>`;
+  } catch(e) { $('miniChart').innerHTML = `<p style="font-size:12px;color:var(--text-muted);padding:10px;text-align:center">Chart loading...</p>`; }
+}
+
+// ── PROGRESS CHART ──
+async function loadChart(days = 7, btn = null) {
+  if (btn) { document.querySelectorAll('.chart-wrap .tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); }
+  const el = $('chartEl');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+  try {
+    const q = query(collection(db,'reports'), where('uid','==',curUser.uid), orderBy('timestamp','desc'), limit(days));
+    const s = await getDocs(q);
+    const reports = s.docs.map(d => d.data()).reverse();
+    if (reports.length === 0) { el.innerHTML = `<div class="empty"><span class="empty-icon">📊</span><p style="font-size:13px">No data yet! Start your sadhna 🙏</p></div>`; return; }
+    const maxM    = Math.max(...reports.map(r => r.malaCount||0), 11);
+    const totM    = reports.reduce((a,r) => a + (r.malaCount||0), 0);
+    const totSat  = reports.filter(r => r.satsangCompleted).length;
+    const totFull = reports.filter(r => r.fullChallenge).length;
+    el.innerHTML = `
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-title">Summary</div>
+        <div class="stats-row" style="margin-top:0">
+          <div class="stat-pill"><span class="num" style="font-size:22px">${reports.length}</span><span class="lbl">Days Logged</span></div>
+          <div class="stat-pill"><span class="num" style="font-size:22px">${totM}</span><span class="lbl">Total Malas</span></div>
+          <div class="stat-pill"><span class="num" style="font-size:22px">${totSat}</span><span class="lbl">Satsang Days</span></div>
+          <div class="stat-pill"><span class="num" style="font-size:22px">${totFull}</span><span class="lbl">Full Days</span></div>
+        </div>
+      </div>
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-title">Daily Mala Count</div>
+        <div class="bar-chart" style="height:140px">
+          ${reports.map(r => {
+            const h = Math.max(4, Math.round(((r.malaCount||0)/maxM)*120));
+            return `<div class="bar-col"><div class="bar-val">${r.malaCount||0}</div><div class="bar saffron" style="height:${h}px"></div><div class="bar-lbl">${r.date.slice(5)}</div></div>`;
+          }).join('')}
+        </div>
+        <div class="chart-legend"><div class="legend-item"><div class="legend-dot" style="background:var(--saffron)"></div>Malas</div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Streak Calendar</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px">
+          ${reports.map(r => `<div class="streak-dot ${r.fullChallenge?'done':r.malaCompleted||r.satsangCompleted?'partial':'empty'}" title="${r.date}">${r.fullChallenge?'✓':'○'}</div>`).join('')}
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <div class="legend-item"><div class="streak-dot done" style="width:16px;height:16px;font-size:8px">✓</div><span style="font-size:11px">Full</span></div>
+          <div class="legend-item"><div class="streak-dot partial" style="width:16px;height:16px;font-size:8px">○</div><span style="font-size:11px">Partial</span></div>
+        </div>
+      </div>`;
+  } catch(e) { el.innerHTML = `<div class="empty"><p style="font-size:13px">Could not load chart. Please try again.</p></div>`; }
+}
+
+// ── COMMUNITY FEED ──
+async function loadFeed(filter = 'all', btn = null) {
+  if (btn) { document.querySelectorAll('.feed-wrap .tab').forEach(t => t.classList.remove('active')); btn.classList.add('active'); }
+  const el = $('feedEl');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+  try {
+    let docs = [];
+    if (filter === 'today') {
+      const s = await getDocs(query(collection(db,'reports'), orderBy('timestamp','desc'), limit(100)));
+      docs = s.docs.filter(d => d.data().date === today());
+    } else if (filter === 'week') {
+      const s = await getDocs(query(collection(db,'reports'), orderBy('timestamp','desc'), limit(200)));
+      const wk = new Date(); wk.setDate(wk.getDate()-7);
+      docs = s.docs.filter(d => { const ts = d.data().timestamp; return ts?.toDate && ts.toDate() >= wk; });
+    } else {
+      const s = await getDocs(query(collection(db,'reports'), orderBy('timestamp','desc'), limit(30)));
+      docs = s.docs;
+    }
+    if (docs.length === 0) { el.innerHTML = `<div class="empty"><span class="empty-icon">🕊️</span><p style="font-size:13px">No reports yet. Be the first!</p></div>`; return; }
+    el.innerHTML = docs.map((d, i) => {
+      const r = d.data(); const rid = d.id;
+      const ini = initials(r.bhaktName);
+      return `<div class="report-card" style="animation-delay:${i*0.04}s" id="rc-${rid}">
+        <div class="report-head">
+          <div class="av" style="width:40px;height:40px;font-size:14px;cursor:pointer" onclick="viewProfileByName('${(r.bhaktName||'').replace(/'/g,"\\'")}')">
+            ${ini}
+          </div>
+          <div class="report-meta">
+            <div class="report-name">${r.bhaktName||'Bhakt'}${r.city?' · '+r.city:''}</div>
+            <div class="report-date">${r.date}${r.mood?' · '+r.mood:''}</div>
+          </div>
+          <span class="pill">🔥 ${r.streak||1}d</span>
+        </div>
+        <div class="badges-row">
+          <span class="badge ${r.malaCompleted?'badge-ok':'badge-no'}">📿 ${r.malaCompleted ? r.malaCount+' Mala ✓' : 'Mala not done'}</span>
+          <span class="badge ${r.satsangCompleted?'badge-ok':'badge-no'}">🎧 ${r.satsangCompleted ? 'Satsang ✓' : 'Satsang pending'}</span>
+          ${r.fullChallenge ? '<span class="badge badge-info">⭐ Full Challenge</span>' : ''}
+        </div>
+        ${r.satsangName ? `<div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">🎧 ${r.satsangName}</div>` : ''}
+        ${r.extraSadhna ? `<div class="quote-box">🌟 ${r.extraSadhna}</div>` : ''}
+        ${r.reflection  ? `<div class="quote-box" style="border-left-color:var(--pink);margin-top:6px">💭 ${r.reflection}</div>` : ''}
+        <div class="comments-wrap">
+          <button class="comments-toggle" onclick="toggleComments('${rid}')">
+            💬 <span id="ctxt-${rid}">${r.commentCount||0} comments</span>
+          </button>
+          <div class="comments-list" id="clist-${rid}">
+            <div id="cItems-${rid}"><div style="font-size:12px;color:var(--text-muted);padding:8px;font-style:italic">Loading comments...</div></div>
+            ${curUser ? `<div class="comment-input-row">
+              <input placeholder="Add a bhakti comment... 🙏" id="cinput-${rid}" onkeydown="if(event.key==='Enter')postComment('${rid}')">
+              <button class="comment-send-btn" onclick="postComment('${rid}')">Send</button>
+            </div>` : ''}
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) { el.innerHTML = `<div class="empty"><p style="font-size:13px">Error loading. Please try again.</p></div>`; }
+}
+
+// ── COMMENTS ──
+async function toggleComments(rid) {
+  const list = $('clist-' + rid);
+  list.classList.toggle('open');
+  if (list.classList.contains('open')) await loadComments(rid);
+}
+
+async function loadComments(rid) {
+  const el = $('cItems-' + rid);
+  try {
+    const q = query(collection(db,'reports',rid,'comments'), orderBy('timestamp','asc'), limit(20));
+    const s = await getDocs(q);
+    if (s.empty) { el.innerHTML = `<p style="font-size:12px;color:var(--text-muted);padding:6px;font-style:italic">No comments yet. Be the first! 🙏</p>`; return; }
+    el.innerHTML = s.docs.map(d => {
+      const c = d.data();
+      const ini = initials(c.bhaktName);
+      const time = c.timestamp?.toDate ? c.timestamp.toDate().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}) : '';
+      return `<div class="comment-item">
+        <div class="comment-av">${ini}</div>
+        <div class="comment-bubble">
+          <div class="comment-who">${c.bhaktName||'Bhakt'}</div>
+          <div class="comment-text">${c.text}</div>
+          <div class="comment-time">${time}</div>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) { el.innerHTML = `<p style="font-size:12px;color:var(--text-muted);padding:6px">Could not load comments.</p>`; }
+}
+
+async function postComment(rid) {
+  if (!curUser || !curData) return;
+  const input = $('cinput-' + rid);
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  try {
+    await addDoc(collection(db,'reports',rid,'comments'), {
+      bhaktName: curData.name, uid: curUser.uid, text, timestamp: serverTimestamp()
+    });
+    await updateDoc(doc(db,'reports',rid), { commentCount: increment(1) });
+    await loadComments(rid);
+    const ctxt = $('ctxt-' + rid);
+    if (ctxt) { const n = parseInt(ctxt.textContent)||0; ctxt.textContent = (n+1) + ' comments'; }
+  } catch(e) { showToast('Could not post comment'); }
+}
+
+// ── PROFILES ──
+async function loadProfiles() {
+  const el = $('profilesGrid');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+  try {
+    const q = query(collection(db,'users'), orderBy('streak','desc'), limit(50));
+    const s = await getDocs(q);
+    if (s.empty) { el.innerHTML = `<div class="empty"><span class="empty-icon">👥</span><p>No bhakts yet!</p></div>`; return; }
+    el.innerHTML = `<div class="profiles-grid">
+      ${s.docs.map((d, i) => {
+        const u = d.data(); const uid = d.id;
+        const ini = initials(u.name);
+        return `<div class="profile-card" style="animation-delay:${i*0.04}s" onclick="viewProfile('${uid}')">
+          <div class="profile-av-lg">${ini}</div>
+          <div class="profile-name">${u.name||'Bhakt'}</div>
+          <div class="profile-city">${u.city||'India'}</div>
+          <div class="profile-mini-stats">
+            <span class="profile-mini-stat">🔥 ${u.streak||0}d</span>
+            <span class="profile-mini-stat">📋 ${u.totalReports||0}</span>
+            <span class="profile-mini-stat">📿 ${u.totalMalas||0}</span>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>`;
+  } catch(e) { el.innerHTML = `<div class="empty"><p>Could not load profiles.</p></div>`; }
+}
+
+async function viewProfile(uid) {
+  goPage('profile');
+  const el = $('profileDetailEl');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+  try {
+    const uSnap = await getDoc(doc(db,'users',uid));
+    if (!uSnap.exists()) { el.innerHTML = `<p style="text-align:center;color:var(--text-muted)">Bhakt not found.</p>`; return; }
+    const u = uSnap.data();
+    const ini = initials(u.name);
+    const s = u.streak || 0;
+    const badges = getBadges(s, u.totalReports || 0);
+    const joinDate = u.joinedAt?.toDate ? u.joinedAt.toDate().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}) : '';
+    let reportsHtml = '';
+    try {
+      const rq = query(collection(db,'reports'), where('uid','==',uid), orderBy('timestamp','desc'), limit(5));
+      const rs = await getDocs(rq);
+      reportsHtml = rs.empty ? `<p style="font-size:13px;color:var(--text-muted);font-style:italic">No reports yet 🙏</p>`
+        : rs.docs.map(d => {
+            const r = d.data();
+            return `<div style="padding:10px 0;border-bottom:1px solid rgba(200,134,10,0.08)">
+              <div style="color:var(--saffron);font-size:12px;font-weight:500;margin-bottom:6px">${r.date}${r.mood?' · '+r.mood:''}</div>
+              <div class="badges-row">
+                <span class="badge ${r.malaCompleted?'badge-ok':'badge-no'}" style="font-size:10px">📿 ${r.malaCompleted?r.malaCount+'M':'✗'}</span>
+                <span class="badge ${r.satsangCompleted?'badge-ok':'badge-no'}" style="font-size:10px">🎧 ${r.satsangCompleted?'✓':'✗'}</span>
+                ${r.fullChallenge?'<span class="badge badge-info" style="font-size:10px">⭐ Full</span>':''}
+              </div>
+              ${r.reflection?`<div style="font-size:12px;color:var(--text-mid);font-style:italic;margin-top:6px">💭 ${r.reflection}</div>`:''}
+            </div>`;
+          }).join('');
+    } catch(e) {}
+    el.innerHTML = `
+      <div class="profile-hero-card">
+        <div class="profile-av-xl">${ini}</div>
+        <h2>${u.name||'Bhakt'}</h2>
+        <p>${u.city||''}${u.bio?' · '+u.bio:''}</p>
+        ${joinDate?`<p style="font-size:11px;margin-top:6px;opacity:0.7">Joined ${joinDate}</p>`:''}
+        <div class="stats-row" style="margin-top:16px">
+          <div class="stat-pill"><span class="num" style="font-size:22px">${s}</span><span class="lbl">🔥 Streak</span></div>
+          <div class="stat-pill"><span class="num" style="font-size:22px">${u.totalReports||0}</span><span class="lbl">📋 Reports</span></div>
+          <div class="stat-pill"><span class="num" style="font-size:22px">${u.totalMalas||0}</span><span class="lbl">📿 Malas</span></div>
+        </div>
+      </div>
+      ${badges.length ? `<div class="check-card"><div class="card-title">Badges</div><div style="display:flex;flex-wrap:wrap;gap:6px">${badges.map(b=>`<span class="ms-badge earned">${b}</span>`).join('')}</div></div>` : ''}
+      <div class="check-card"><div class="card-title">Recent Sadhna</div>${reportsHtml}</div>`;
+  } catch(e) { el.innerHTML = `<div class="empty"><p>Could not load profile.</p></div>`; }
+}
+
+async function viewProfileByName(name) {
+  if (!name) return;
+  try {
+    const q = query(collection(db,'users'), where('name','==',name), limit(1));
+    const s = await getDocs(q);
+    if (!s.empty) viewProfile(s.docs[0].id);
+  } catch(e) {}
+}
+
+// ── LEADERBOARD ──
+async function loadLB() {
+  const el = $('lbEl');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+  try {
+    const q = query(collection(db,'users'), orderBy('streak','desc'), limit(20));
+    const s = await getDocs(q);
+    if (s.empty) { el.innerHTML = `<div class="empty"><span class="empty-icon">🏆</span><p>No bhakts yet!</p></div>`; return; }
+    const medals = ['🥇','🥈','🥉'];
+    const classes = ['gold','silver','bronze'];
+    el.innerHTML = s.docs.map((d, i) => {
+      const u = d.data(); const ini = initials(u.name);
+      return `<div class="lb-row ${i<3?classes[i]:''}" style="animation-delay:${i*0.04}s" onclick="viewProfile('${d.id}')">
+        <div class="lb-rank">${i<3?medals[i]:i+1}</div>
+        <div class="av" style="width:38px;height:38px;font-size:13px">${ini}</div>
+        <div class="lb-info">
+          <div class="lb-name">${u.name}${u.city?' · '+u.city:''}</div>
+          <div class="lb-stats">📿 ${u.totalMalas||0} Malas · 📋 ${u.totalReports||0} Reports</div>
+        </div>
+        <div>
+          <span class="lb-streak-num">${u.streak||0}</span>
+          <span class="lb-streak-lbl">🔥 days</span>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(e) { el.innerHTML = `<div class="empty"><p>Error loading.</p></div>`; }
+}
+
+// ── ANNOUNCEMENTS ──
+async function loadAnn() {
+  const el = $('annEl');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>Loading...</div>';
+  try {
+    const q = query(collection(db,'announcements'), orderBy('timestamp','desc'), limit(20));
+    const s = await getDocs(q);
+    if (s.empty) { el.innerHTML = `<div class="empty"><span class="empty-icon">📢</span><p>No announcements yet. Check back soon! 🪷</p></div>`; return; }
+    el.innerHTML = s.docs.map((d, i) => {
+      const a = d.data();
+      const date = a.timestamp?.toDate ? a.timestamp.toDate().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}) : 'Recent';
+      return `<div class="ann-card" style="animation-delay:${i*0.05}s">
+        <div class="ann-title">📢 ${a.title||'Announcement'}</div>
+        <div class="ann-msg">${a.message||''}</div>
+        <div class="ann-meta">Posted by ${a.postedBy||'Admin'} · ${date}</div>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    try {
+      const s2 = await getDocs(query(collection(db,'announcements'), limit(20)));
+      el.innerHTML = s2.empty ? `<div class="empty"><span class="empty-icon">📢</span><p>No announcements yet.</p></div>`
+        : s2.docs.map(d=>{const a=d.data();return `<div class="ann-card"><div class="ann-title">📢 ${a.title||''}</div><div class="ann-msg">${a.message||''}</div></div>`;}).join('');
+    } catch(e2) { el.innerHTML = `<div class="empty"><p>Could not load announcements.</p></div>`; }
+  }
+}
+
+// ── ADMIN ──
+async function loadAdmin() {
+  if (!adminUnlocked) return;
+  try {
+    const us = await getDocs(collection(db,'users'));
+    const rs = await getDocs(collection(db,'reports'));
+    const t  = today();
+    const todayReports = rs.docs.filter(d => d.data().date === t);
+    const wk = new Date(); wk.setDate(wk.getDate()-7);
+    const activeSet = new Set();
+    rs.docs.forEach(d => { const r=d.data(); if(r.timestamp?.toDate && r.timestamp.toDate()>=wk) activeSet.add(r.uid); });
+    $('aTU').textContent = us.size;
+    $('aTR').textContent = todayReports.length;
+    $('aAR').textContent = rs.size;
+    $('aAB').textContent = activeSet.size;
+    $('adminUsers').innerHTML = us.docs.map(d => {
+      const u = d.data();
+      return `<div class="data-row">
+        <div class="av" style="width:34px;height:34px;font-size:12px">${initials(u.name)}</div>
+        <div style="flex:1;font-size:13px;font-weight:500;color:var(--text-dark)">${u.name}</div>
+        <div style="flex:2;font-size:12px;color:var(--text-muted)">${u.email}</div>
+        <div style="font-size:13px;font-weight:600;color:var(--saffron)">🔥 ${u.streak||0}d</div>
+      </div>`;
+    }).join('');
+  } catch(e) { console.error(e); }
+}
+
+async function postAnn() {
+  const title = $('annTitle').value.trim();
+  const msg   = $('annMsg').value.trim();
+  if (!title || !msg) { showToast('Please fill title and message'); return; }
+  await addDoc(collection(db,'announcements'), { title, message: msg, postedBy: curData?.name || 'Admin', timestamp: serverTimestamp() });
+  showToast('📢 Announcement posted! Jay Harivansh!');
+  $('annTitle').value = '';
+  $('annMsg').value = '';
+}
+</script>
+</body>
+</html>
